@@ -1,0 +1,26 @@
+export let siteInfo = [
+    {
+        param:'home',
+        name:'ホーム',
+        path:'/',
+        fontawesome:'home'
+    },
+    {
+        param:'search',
+        name:'検索',
+        path:'/search',
+        fontawesome:'search'
+    },
+    {
+        param:'notice',
+        name:'通知',
+        path:'/notice',
+        fontawesome:'bell'
+    },
+    {
+        param:'dm',
+        name:'メッセージ',
+        path:'/dm',
+        fontawesome:'envelope'
+    }
+]
