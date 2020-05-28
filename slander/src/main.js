@@ -5,6 +5,9 @@ import routes from './router/index.js';
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+
+import { Slide } from 'vue-burger-menu'
+Vue.component('slide', Slide);
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons';

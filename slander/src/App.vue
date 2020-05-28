@@ -8,6 +8,7 @@
         <div class="fixed-button-wrapper">
           <PostBtn :PageParam="pageParam" />
         </div>
+        <SideBar v-if="IsOpensideBar" :userInfoLabel="userInfoArr" />
         <Footer :siteInfoLabel="siteInfoArr" />
     </div>
 </div>
@@ -17,6 +18,7 @@
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import PostBtn from '@/components/postBtn';
+import SideBar from '@/components/sideBar';
 
 import * as userInfo from "./assets/js/userInfo.js";
 import * as siteInfo from "./assets/js/siteInfo.js";
@@ -26,11 +28,12 @@ export default {
     components: {
         Header,
         Footer,
-        PostBtn
+        PostBtn,
+        SideBar
     },
     watch: {
-        '$route'() {
-            this.changePath();
+        '$route'(to) {
+            this.changePath(to);
         }
     },
     data() {
@@ -39,6 +42,8 @@ export default {
             siteInfoArr: [],
             pageTitle: '',
             pageParam: '',
+            beforePagePath:'/',
+            IsOpensideBar:false
         }
     },
     created() {
@@ -46,15 +51,15 @@ export default {
         this.siteInfoArr = siteInfo['siteInfo'];
     },
     mounted() {
-        this.changePath();
+        this.changePath(this.beforePagePath);
     },
     methods: {
-        changePath() {
+        changePath(to) {
             this.siteInfoArr.forEach(el => {
                 if (el.path == this.$route.path) {
                     this.pageTitle = el.name;
                     this.pageParam = el.param;
-                    console.log(this.pageParam);
+                    this.beforePagePath = to;
                 }
             });
         }

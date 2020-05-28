@@ -2,6 +2,7 @@ import Home from '@/pages/home'
 import Notice from '@/pages/notice'
 import Search from '@/pages/search'
 import Dm from '@/pages/dm'
+import Post from '@/pages/post'
 
 
 export default [
@@ -20,5 +21,9 @@ export default [
     {
       path: '/dm',
       component: Dm
+    },
+    {
+      path: '/post',
+      component: Post
     }
 ]
