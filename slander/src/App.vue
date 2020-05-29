@@ -1,6 +1,8 @@
 <template>
 <div id="app">
-    <TerminalNotice v-if="IsterminalNotice" />
+    <TerminalNotice v-if="IsterminalNotice" 
+        :terminal_notice_name="Terminal_notice_name" 
+        :terminal_notice_message="Terminal_notice_message" />
     <div id="content">
         <Header :userInfoLabel="userInfoArr" :PageTitle="pageTitle" />
         <pull-to v-if="!IsOpenOtherPage" :top-config="config" :top-load-method="refresh" @top-state-change="stateChange" :is-bottom-bounce="false" :is-top-bounce="movepullTo" >
@@ -13,7 +15,7 @@
         </div>
 
         <div class="fixed-button-wrapper">
-            <PostBtn :PageParam="pageParam" set="a" />
+            <PostBtn :PageParam="pageParam" />
         </div>
 
         <SideBar v-if="IsOpensideBar" :userInfoLabel="userInfoArr" />
@@ -32,6 +34,9 @@ import TerminalNotice from '@/components/terminalNotice';
 import PullTo from 'vue-pull-to'
 import * as userInfo from "./assets/js/userInfo.js";
 import * as siteInfo from "./assets/js/siteInfo.js";
+//import * as userStory from "./assets/js/userStory.js";
+import * as message from "./assets/js/message.js";
+
 export default {
     name: 'App',
     components: {
@@ -58,6 +63,8 @@ export default {
             IsOpenOtherPage: false, //基本4ページ以外はスワイプ 取り消す
             movepullTo: false, //スクロールトップ以外は通常スクロール
             IsterminalNotice:false, //端末通知がきたか？
+            Terminal_notice_name:'',//端末通知名
+            Terminal_notice_message:'',//端末通知メッセージ
             config: {
                 pullText: '',
                 triggerText: '',
@@ -74,14 +81,21 @@ export default {
         this.siteInfoArr = siteInfo['siteInfo'];
     },
     mounted() {
-        var self = this;
         this.changePath(this.beforePagePath);
         window.addEventListener('scroll', this.handleScroll);
-        setTimeout(function(){
-            self.IsterminalNotice = true;
-            }, 2*1000);
+
+        this.story();
     },
     methods: {
+        story(){
+            //友人からのlineがくる
+            this.Terminal_notice_name = message['line']['0']['name'];
+            this.Terminal_notice_message = message['line']['0']['message'];
+            var self = this;
+            setTimeout(function(){
+                self.IsterminalNotice = true;
+            }, 2*1000);
+        },
         handleScroll() {
             if(window.scrollY < 30 ){
                 this.movepullTo = true;

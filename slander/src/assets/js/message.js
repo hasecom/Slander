@@ -1,0 +1,22 @@
+export let line = [
+    {
+        param:'0',
+        name:'友達',
+        message:'あの写真投稿しておいて！'
+    },
+    {
+        param:'1',
+        name:'友達',
+        message:'あの写真投稿しておいて！'
+    },
+    {
+        param:'2',
+        name:'友達',
+        message:'あの写真投稿しておいて！'
+    },
+    {
+        param:'3',
+        name:'友達',
+        message:'あの写真投稿しておいて！'
+    }
+]

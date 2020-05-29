@@ -1,21 +1,29 @@
 <template>
 <div id="terminalNoitce" class="notice shadow my-2 border">
-    <div class="row">
-        <div class="icon col-2 ">
+    <div class="row px-2">
+        <div class="icon col-2">
             ■
         </div>
         <div class="col-10 px-0">
             LIME
         </div>
     </div>
-    <div class="px-3 name">友達</div>
-    <div class="px-3">あの写真投稿しておいてｗｗ</div>
+    <div class="px-3 name">{{terminal_notice_name}}</div>
+    <div class="px-3">{{terminal_notice_message}}</div>
 </div>
 </template>
 
 <script>
 import $ from 'jquery';
 export default {
+    props:{
+        terminal_notice_name:{
+            type:String,
+        },
+        terminal_notice_message:{
+            type:String,
+        }
+    },
     data() {
         return {
 
