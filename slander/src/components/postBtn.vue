@@ -20,7 +20,7 @@ export default {
             }
             return 'feather-alt'
         }
-    }
+    },
 }
 </script>
 

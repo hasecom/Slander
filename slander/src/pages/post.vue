@@ -34,7 +34,7 @@ export default {
         this.userInfoArr = userInfo['userInfo'];
     },
     mounted(){
-        this.iconPath = this.imageLoad(this.userInfoArr['icon']);
+        this.iconPath = this.imageLoad(this.userInfoArr['icon']);  
     },
     methods:{
     imageLoad(fileName) {
@@ -65,7 +65,7 @@ export default {
     bottom: 0;
     left: 0;
     width:100%;
-    z-index: 15;
+    z-index: 30;
     background: white;
 }
 .send-btn{

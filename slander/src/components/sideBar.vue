@@ -1,10 +1,10 @@
 <template>
-<div id="sideBar" @click.self="closeSideMenu">
+<div id="sideBar" @click.self="closeAnimationSideMenu">
     <div class="openMenu">
         <div class="MenuHeader border-bottom row mx-0">
             <div class="col-10 px-0">アカウント情報</div>
             <div class="col-2 px-0">
-                <font-awesome-icon icon="times" class="font-awesome-icon-element" @click="closeSideMenu" />
+                <font-awesome-icon icon="times" class="font-awesome-icon-element" @click="closeAnimationSideMenu" />
             </div>
         </div>
         <div class="MenuMain">
@@ -17,7 +17,7 @@
             <div class="text-muted small">
                 @{{userInfoLabel['id']}}
             </div>
-            <div class="follow row mg-0 py-3">
+            <div class="follow row mg-0 py-3 px-1">
                 <div class="col-6 pr-0">
                     <span class="font-weight-bold">{{userInfoLabel['follow']}}</span><span class="text-muted small">フォロー中</span>
                 </div>
@@ -54,8 +54,8 @@
     </div>
 </div>
 </template>
-
 <script>
+import $ from 'jquery';
 export default {
     props: {
         userInfoLabel: {
@@ -68,14 +68,33 @@ export default {
         }
     },
     mounted() {
-        this.iconPath = this.imageLoad(this.userInfoLabel['icon'])
+        this.iconPath = this.imageLoad(this.userInfoLabel['icon']);
+        if(this.$parent.IsOpensideBar){
+            this.openAnimationSideMenu();
+        }
     },
     methods: {
         imageLoad(fileName) {
             return require('../assets/images/' + fileName + '.jpg');
         },
-        closeSideMenu() {
-            this.$parent.IsOpensideBar = false;
+        openAnimationSideMenu(){
+            $('#sideBar').animate({
+                'opacity':'1'
+            });
+            $('.openMenu').animate({
+                "left":"0"
+            });
+        },
+        closeAnimationSideMenu(){
+            var self = this;
+            $('#sideBar').animate({
+                'opacity':'0.5'
+            });
+            $('.openMenu').animate({
+                "left":"-100%"
+            },function(){
+                self.$parent.IsOpensideBar = false;
+            });
         }
     }
 }
@@ -91,6 +110,7 @@ export default {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
+    opacity:0.5;
     z-index: 20;
 }
 
@@ -102,8 +122,10 @@ export default {
 }
 
 .openMenu {
+    position:absolute;
+    left:-100%;
     background: white;
-    width: 70%;
+    width: 75%;
     height: 100%;
 }
 
@@ -124,6 +146,6 @@ export default {
     text-align: right;
 }
 .sideMenuContent >div{
-    padding:10px 0px;
+    padding:10px 10px;
 }
 </style>
