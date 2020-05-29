@@ -1,17 +1,16 @@
 <template>
 <div id="app">
+    <TerminalNotice v-if="IsterminalNotice" />
     <div id="content">
         <Header :userInfoLabel="userInfoArr" :PageTitle="pageTitle" />
-
-        <pull-to v-if="!IsOpenOtherPage" :top-config="config" :top-load-method="refresh" @top-state-change="stateChange">
-            <div id="main" style="height:1500px;">
+        <pull-to v-if="!IsOpenOtherPage" :top-config="config" :top-load-method="refresh" @top-state-change="stateChange" :is-bottom-bounce="false" :is-top-bounce="movepullTo" >
+            <div id="main">
                 <router-view></router-view>
             </div>
         </pull-to>
-        <div v-if="IsOpenOtherPage" id="main" style="height:1500px;">
+        <div v-if="IsOpenOtherPage" id="main">
             <router-view></router-view>
         </div>
-
 
         <div class="fixed-button-wrapper">
             <PostBtn :PageParam="pageParam" set="a" />
@@ -29,6 +28,7 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import PostBtn from '@/components/postBtn';
 import SideBar from '@/components/sideBar';
+import TerminalNotice from '@/components/terminalNotice';
 import PullTo from 'vue-pull-to'
 import * as userInfo from "./assets/js/userInfo.js";
 import * as siteInfo from "./assets/js/siteInfo.js";
@@ -39,7 +39,8 @@ export default {
         Footer,
         PostBtn,
         SideBar,
-        PullTo
+        PullTo,
+        TerminalNotice
     },
     watch: {
         '$route'(toPage) {
@@ -52,16 +53,18 @@ export default {
             siteInfoArr: [],
             pageTitle: '',
             pageParam: '',
-            beforePagePath: '/',
-            IsOpensideBar: false,
-            IsOpenOtherPage:false,
+            beforePagePath: '/', //投稿画面用(戻ったときにさっきいたページ)
+            IsOpensideBar: false, //sideBarOpenしたらtrue
+            IsOpenOtherPage: false, //基本4ページ以外はスワイプ 取り消す
+            movepullTo: false, //スクロールトップ以外は通常スクロール
+            IsterminalNotice:false, //端末通知がきたか？
             config: {
                 pullText: '',
                 triggerText: '',
                 loadingText: '',
                 doneText: ''
             },
-            otherPagePath:[
+            otherPagePath: [
                 '/post'
             ]
         }
@@ -71,20 +74,32 @@ export default {
         this.siteInfoArr = siteInfo['siteInfo'];
     },
     mounted() {
+        var self = this;
         this.changePath(this.beforePagePath);
+        window.addEventListener('scroll', this.handleScroll);
+        setTimeout(function(){
+            self.IsterminalNotice = true;
+            }, 2*1000);
     },
     methods: {
+        handleScroll() {
+            if(window.scrollY < 30 ){
+                this.movepullTo = true;
+            }else{
+                this.movepullTo = false;
+            }
+        },
         changePath(toPage) {
             this.siteInfoArr.forEach(el => {
                 if (el.path == this.$route.path) {
                     this.pageTitle = el.name;
                     this.pageParam = el.param;
-                    this.beforePagePath = toPage; 
-                    this.IsOpenOtherPage = false;          
+                    this.beforePagePath = toPage;
+                    this.IsOpenOtherPage = false;
                 }
             });
             this.otherPagePath.forEach(el => {
-                if(el == this.$route.path){
+                if (el == this.$route.path) {
                     this.IsOpenOtherPage = true;
                 }
             });
@@ -94,11 +109,11 @@ export default {
                 $('.default-text').addClass('_pull');
                 $('.default-text').removeClass('_trigger');
                 $('.default-text').removeClass('_loaded-done');
-            }else if(state === 'trigger'){
+            } else if (state === 'trigger') {
                 $('.default-text').addClass('_trigger');
                 $('.default-text').removeClass('_pull');
                 $('.default-text').removeClass('_loaded-done');
-            }else if (state === 'loaded-done') {
+            } else if (state === 'loaded-done') {
                 $('.default-text').addClass('_loaded-done');
                 $('.default-text').removeClass('_pull');
                 $('.default-text').removeClass('_trigger');
@@ -117,18 +132,21 @@ export default {
     top: 80%;
     right: 10%;
 }
-._pull:before{
-    content:'↑';
+
+._pull:before {
+    content: '↑';
 }
-._trigger:before{
-    content:'↓';
+
+._trigger:before {
+    content: '↓';
 }
-._loaded-done{
+
+._loaded-done {
     background-image: url("./assets/images/loading.gif");
     background-repeat: no-repeat;
-    margin:0 auto;
+    margin: 0 auto;
     background-size: contain;
-    width:25px;
-    height:25px;
+    width: 25px;
+    height: 25px;
 }
 </style>
