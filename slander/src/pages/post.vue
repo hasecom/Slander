@@ -2,12 +2,12 @@
 <div id="post">
     <div class="post-header border-bottom row mx-0">
         <div class="col-2">
-            <router-link :to="$parent.beforePagePath" tag='button' class="btn footer-router-link">
+            <router-link :to="$parent.beforePagePath != undefined ? $parent.beforePagePath : '/' " tag='button' class="btn footer-router-link">
                 <font-awesome-icon icon="arrow-left" class="arrow-left" />
             </router-link>
         </div>
         <div class="col-10 text-right">
-            <button type="button" class="btn btn-sm send-btn rounded-pill">投稿する</button>
+            <button type="button" class="btn btn-sm send-btn rounded-pill" @click="post">投稿する</button>
         </div>
     </div>
     <div class="post-main row">
@@ -15,31 +15,64 @@
             <img :src="iconPath" alt="" class="rounded-circle border">
         </div>
         <div class="post-textarea col-9">
-            <textarea name="" id="" cols="33" rows="4" placeholder="いまなにしてる？"></textarea>
+            <textarea name="" id="postTextarea" cols="20" rows="4" placeholder="いまなにしてる？" v-bind:readonly="is_readonly"></textarea>
+            <div class="first_post_img" v-if="this.$parent.userStory != undefined ? !this.$parent.userStory['firstPost'] : false">
+                <img class="border" :src="imageLoad(this.$parent.userStory['firstPostImgName'])" alt="">
+            </div>
         </div>
     </div>
 </div>
 </template>
 
 <script>
+import $ from 'jquery';
 import * as userInfo from "../assets/js/userInfo.js";
 export default {
-    data(){
-        return{
-            userInfoArr:[],
-            iconPath:''
+    data() {
+        return {
+            userInfoArr: [],
+            iconPath: '',
+            is_readonly: true
         }
     },
-    created(){
+    created() {
         this.userInfoArr = userInfo['userInfo'];
     },
-    mounted(){
-        this.iconPath = this.imageLoad(this.userInfoArr['icon']);  
+    mounted() {
+        this.iconPath = this.imageLoad(this.userInfoArr['icon']);
+        if (this.$parent.userStory != undefined) {
+            //初回投稿前
+            if (!this.$parent.userStory['firstPost']) {
+                $('#postTextarea').val(this.$parent.userStory['firstPostMessage']);
+            } else {
+                this.is_readonly = false;
+            }
+        }
     },
-    methods:{
-    imageLoad(fileName) {
-        return require('../assets/images/' + fileName + '.jpg');
-    },
+    methods: {
+        imageLoad(fileName) {
+            return require('../assets/images/' + fileName + '.jpg');
+        },
+        post() {
+            //投稿ボタンを押したら
+            this.$router.push('/')
+
+            //初回
+            if (!this.$parent.userStory['firstPost']) {
+                this.$parent.timeLine.unshift({
+                    id: this.$parent.timeLine.length + 1,
+                    name: this.userInfoArr['name'],
+                    message: this.$parent.userStory['firstPostMessage'],
+                    imagePath: this.$parent.userStory['firstPostImgName'],
+                    iconPath: this.userInfoArr['icon'],
+                    good: 0,
+                    repost: 0,
+                    timestamp: ""
+                });
+                this.$parent.userStory.firstPostFnc();
+                this.$parent.first_post_after();
+            }
+        }
     }
 }
 </script>
@@ -49,41 +82,55 @@ export default {
     padding-left: 14px;
     padding-right: 14px;
 }
-.post-icon-wrapper > img{
-    width:46px;
-    height:46px;
+
+.post-icon-wrapper>img {
+    width: 46px;
+    height: 46px;
     object-fit: cover;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 0px 2px inset;
 }
-.post-header{
-    padding:10px 0px;
+
+.post-header {
+    padding: 10px 0px;
 }
+
 #post {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    width:100%;
+    width: 100%;
     z-index: 30;
     background: white;
 }
-.send-btn{
-    background:#00acee;
-    color:white;
-    font-weight:600;
+
+.send-btn {
+    background: #00acee;
+    color: white;
+    font-weight: 600;
 }
-.arrow-left{
-    color:#00acee;
+
+.arrow-left {
+    color: #00acee;
 }
-.post-main{
-    padding-top:10px;
+
+.post-main {
+    padding-top: 10px;
 }
-.post-textarea > textarea{
-    border:none;
-    font-size:18px;
+
+.post-textarea>textarea {
+    border: none;
+    font-size: 18px;
 }
-.post-textarea > textarea:focus{
-    outline:0px;
+
+.post-textarea>textarea:focus {
+    outline: 0px;
+}
+
+.first_post_img>img {
+    width: 80%;
+    border-radius: 10px;
+
 }
 </style>

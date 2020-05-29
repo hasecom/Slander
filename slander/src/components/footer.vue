@@ -1,7 +1,7 @@
 <template>
     <div id="footer" class="fixed-bottom">
         <div class="row  footer_menu_wrapper">
-            <div class="text-center col-3" v-for="item in siteInfoLabel" :key="item['param']">
+            <div :id="item['param']" :data-item="$parent.notice_count" class="text-center col-3" v-for="item in siteInfoLabel" :key="item['param']">
                 <router-link :to="item['path']" tag='button' class="btn footer-router-link">
                     <font-awesome-icon :icon="item['fontawesome']" :style="selectPage(item['path'])" />
                 </router-link>
@@ -10,16 +10,30 @@
     </div>
 </template>
 <script>
+import $ from 'jquery';
 export default {
     props:{
         siteInfoLabel:{
             type:Array
         }
     },
+    watch:{
+        "$parent.notice_count"(){
+            this.noticeChange();
+        }
+    },
     mounted(){
+        this.noticeChange();
     },
     methods:{
-
+        noticeChange(){
+            $('#notice').data('item',this.$parent.notice_count);
+            if($('#notice').data('item') > 0){
+                $('#notice').addClass('noticeDisplay');
+            }else{
+                $('#notice').removeClass('noticeDisplay');
+            }
+        }
     },
     computed:{
         selectPage:function(){
@@ -54,4 +68,17 @@ export default {
 .footer-router-link  {
     font-size:23px !important;
 }
+.noticeDisplay:after{
+    content:attr(data-item);
+    font-size:13px;
+    left:50%;
+    position:absolute;
+    background:#00acee;
+    border:solid 1px white;
+    border-radius:50%;
+    width:20px;
+    height:20px;
+    color:white;
+}
+
 </style>

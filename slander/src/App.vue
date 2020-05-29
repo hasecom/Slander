@@ -34,8 +34,9 @@ import TerminalNotice from '@/components/terminalNotice';
 import PullTo from 'vue-pull-to'
 import * as userInfo from "./assets/js/userInfo.js";
 import * as siteInfo from "./assets/js/siteInfo.js";
-//import * as userStory from "./assets/js/userStory.js";
+import * as userStory from "./assets/js/userStory.js";
 import * as message from "./assets/js/message.js";
+import * as TimeLine from "./assets/js/timeline.js";
 
 export default {
     name: 'App',
@@ -54,8 +55,10 @@ export default {
     },
     data() {
         return {
+            userStory:[], 
             userInfoArr: [],
             siteInfoArr: [],
+            timeLine:[],
             pageTitle: '',
             pageParam: '',
             beforePagePath: '/', //投稿画面用(戻ったときにさっきいたページ)
@@ -65,6 +68,7 @@ export default {
             IsterminalNotice:false, //端末通知がきたか？
             Terminal_notice_name:'',//端末通知名
             Terminal_notice_message:'',//端末通知メッセージ
+            notice_count:0,
             config: {
                 pullText: '',
                 triggerText: '',
@@ -79,8 +83,13 @@ export default {
     created() {
         this.userInfoArr = userInfo['userInfo'];
         this.siteInfoArr = siteInfo['siteInfo'];
+        this.timeLine = TimeLine['timeline01'];
+        this.userStory = userStory;
     },
     mounted() {
+        if(this.$route.path != '/'){
+            this.$router.push('/')
+        }
         this.changePath(this.beforePagePath);
         window.addEventListener('scroll', this.handleScroll);
 
@@ -95,6 +104,12 @@ export default {
             setTimeout(function(){
                 self.IsterminalNotice = true;
             }, 2*1000);
+        },
+        first_post_after(){
+            var self = this;
+            setTimeout(function(){
+                self.notice_count = 1 
+            }, 3*1000);
         },
         handleScroll() {
             if(window.scrollY < 30 ){
