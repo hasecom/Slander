@@ -37,6 +37,9 @@ import * as siteInfo from "./assets/js/siteInfo.js";
 import * as userStory from "./assets/js/userStory.js";
 import * as message from "./assets/js/message.js";
 import * as TimeLine from "./assets/js/timeline.js";
+import * as User from "./assets/js/user.js";
+import * as UserPost from "./assets/js/userpost.js";
+import * as UserNotice from "./assets/js/usernotice.js";
 
 export default {
     name: 'App',
@@ -59,6 +62,9 @@ export default {
             userInfoArr: [],
             siteInfoArr: [],
             timeLine:[],
+            user:[],
+            userpost:[],
+            userNotice:[],
             pageTitle: '',
             pageParam: '',
             beforePagePath: '/', //投稿画面用(戻ったときにさっきいたページ)
@@ -85,6 +91,9 @@ export default {
         this.siteInfoArr = siteInfo['siteInfo'];
         this.timeLine = TimeLine['timeline01'];
         this.userStory = userStory;
+        this.user = User['user'];
+        this.userpost = UserPost['userPost'];
+        this.userNotice = UserNotice['userNotice'];
     },
     mounted() {
         if(this.$route.path != '/'){

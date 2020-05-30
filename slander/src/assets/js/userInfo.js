@@ -4,7 +4,7 @@ export let userInfo = {
     "age":"20",
     "profile":"みんな仲良くしてください",
     "address":"愛知県名古屋市",
-    "id":"taro",
+    "id":"you",
     "password":"password",
     "icon":"icon",
     "follow":"100",
