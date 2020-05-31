@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="noticeComponent">
     <div v-for="(item,index) in noticelistData" :key="index">
         <!-- 連続がひとつ & リプ -->
         <div v-if="item.length == 1">
@@ -14,6 +14,20 @@
                     <div class="font-weight-bold">{{item[0].user_name}}</div>
                     <div class="text-muted small">返信先: {{userInfoArr.name}}さん</div>
                     {{item[0].reply}}
+                    <div class="row text-muted text-center pt-3">
+                        <div class="col-3 px-0">
+                            <font-awesome-icon icon="comment" />
+                        </div>
+                        <div class="col-3 px-0">
+                            <font-awesome-icon icon="retweet" />
+                        </div>
+                        <div class="col-3 px-0">
+                            <font-awesome-icon icon="heart" />
+                        </div>
+                        <div class="col-3 px-0">
+                            <font-awesome-icon icon="external-link-alt" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- good,rt -->
@@ -21,7 +35,7 @@
                 <div class="row py-2 px-1 border-bottom">
                     <div class="col-3 left_item" :style="iconColor(item[0].type)">
                         <div>
-                            <font-awesome-icon :icon="typeObj[item[0].type].fontawesome" class="notice_label"/>
+                            <font-awesome-icon :icon="typeObj[item[0].type].fontawesome" class="notice_label" />
                         </div>
                     </div>
                     <div class="col-9">
@@ -39,6 +53,7 @@
                 </div>
             </div>
         </div>
+        <!-- いいね/RT連続 -->
         <div v-else>
             <!-- good,rt -->
             <div class="row py-2 px-1 border-bottom">
@@ -57,7 +72,11 @@
                     </div>
                     <div class="notice_info">
                         <span class="font-weight-bold">{{item[0].user_name}}</span>
-                        と他{{item.length - 1}}人
+                        さんと
+                        <span v-if="item.length == 2">
+                            <span class="font-weight-bold">{{item[1].user_name}}</span>さん
+                        </span>
+                        <span v-if="item.length != 2">他{{item.length - 1}}人</span>
                         {{typeObj[item[0].type].message}}
                     </div>
                     <div class="text-muted small">
@@ -101,7 +120,9 @@ export default {
             }
         }
     },
-    mounted() {},
+    mounted() {
+
+    },
     methods: {
         imageLoad(fileName) {
             return require('../assets/images/' + fileName + '.jpg');
@@ -157,7 +178,9 @@ export default {
 .notice_info {
     font-size: 16px;
 }
-.notice_label{
-    font-size:20px;
+
+.notice_label {
+    font-size: 20px;
 }
+
 </style>

@@ -1,5 +1,13 @@
 export let userPost = [
     {
+        user_post_id:2,
+        message:'みんなおやすみ！',
+        imagePath:"",
+        good:0,
+        repost:0,
+        timestamp:"5時間前"
+    },
+    {
         user_post_id:1,
         message:'めっせーじ１',
         imagePath:"",

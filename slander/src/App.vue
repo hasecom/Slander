@@ -1,13 +1,11 @@
 <template>
 <div id="app">
-    <TerminalNotice v-if="IsterminalNotice" 
-        :terminal_notice_name="Terminal_notice_name" 
-        :terminal_notice_message="Terminal_notice_message" />
+    <TerminalNotice v-if="IsterminalNotice" :terminal_notice_name="Terminal_notice_name" :terminal_notice_message="Terminal_notice_message" />
     <div id="content">
         <Header :userInfoLabel="userInfoArr" :PageTitle="pageTitle" />
-        <pull-to v-if="!IsOpenOtherPage" :top-config="config" :top-load-method="refresh" @top-state-change="stateChange" :is-bottom-bounce="false" :is-top-bounce="movepullTo" >
+        <pull-to :top-load-method="refresh" v-if="!IsOpenOtherPage" :top-config="config"  @top-state-change="stateChange" :is-bottom-bounce="false" :is-top-bounce="movepullTo">
             <div id="main">
-                <router-view></router-view>
+                <router-view ref="router_view"></router-view>
             </div>
         </pull-to>
         <div v-if="IsOpenOtherPage" id="main">
@@ -58,23 +56,24 @@ export default {
     },
     data() {
         return {
-            userStory:[], 
+            userStory: [],
             userInfoArr: [],
             siteInfoArr: [],
-            timeLine:[],
-            user:[],
-            userpost:[],
-            userNotice:[],
+            timeLine: [],
+            user: [],
+            userpost: [],
+            userNotice: [],
             pageTitle: '',
             pageParam: '',
             beforePagePath: '/', //投稿画面用(戻ったときにさっきいたページ)
             IsOpensideBar: false, //sideBarOpenしたらtrue
             IsOpenOtherPage: false, //基本4ページ以外はスワイプ 取り消す
             movepullTo: false, //スクロールトップ以外は通常スクロール
-            IsterminalNotice:false, //端末通知がきたか？
-            Terminal_notice_name:'',//端末通知名
-            Terminal_notice_message:'',//端末通知メッセージ
-            notice_count:0,
+            IsterminalNotice: false, //端末通知がきたか？
+            Terminal_notice_name: '', //端末通知名
+            Terminal_notice_message: '', //端末通知メッセージ
+            notice_count: 0, //通知件数
+            beforenoticelistLength:0, //通知の配列length
             config: {
                 pullText: '',
                 triggerText: '',
@@ -96,7 +95,7 @@ export default {
         this.userNotice = UserNotice['userNotice'];
     },
     mounted() {
-        if(this.$route.path != '/'){
+        if (this.$route.path != '/') {
             this.$router.push('/')
         }
         this.changePath(this.beforePagePath);
@@ -105,25 +104,34 @@ export default {
         this.story();
     },
     methods: {
-        story(){
+        story() {
             //友人からのlineがくる
             this.Terminal_notice_name = message['line']['0']['name'];
             this.Terminal_notice_message = message['line']['0']['message'];
             var self = this;
-            setTimeout(function(){
+            setTimeout(function () {
                 self.IsterminalNotice = true;
-            }, 2*1000);
+            }, 2 * 1000);
         },
-        first_post_after(){
+        first_post_after() {
             var self = this;
-            setTimeout(function(){
-                self.notice_count = 1 
-            }, 3*1000);
+            setTimeout(function () {
+                //通知が来る
+                self.notice_count = 1;
+                console.log(self.userStory)
+                self.userNotice.unshift({
+                    notice_id: 7, //通知ID
+                    fk_user_post_id: 2, //投稿ID
+                    fk_user_id: 1,
+                    reply: "さすがにそれまずくね？",
+                    type: 2 //0:RT,1:GOOD,2:REPLY
+                })
+            }, 3 * 1000);
         },
         handleScroll() {
-            if(window.scrollY < 30 ){
+            if (window.scrollY < 30) {
                 this.movepullTo = true;
-            }else{
+            } else {
                 this.movepullTo = false;
             }
         },
@@ -159,6 +167,16 @@ export default {
         },
         refresh(loaded) {
             loaded('done');
+            if(this.pageParam == "home"){
+                console.log("homeスワイプ ")
+            }else if(this.pageParam == "notice"){
+                //通知スワイプ
+                this.$refs.router_view._mounted();
+            }else if(this.pageParam == "search"){
+                console.log("検索スワイプ ")
+            }else if(this.pageParam == "dm"){
+                console.log("dmスワイプ ")
+            }
         }
     }
 }
