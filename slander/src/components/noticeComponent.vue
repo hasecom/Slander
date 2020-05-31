@@ -1,42 +1,67 @@
 <template>
-<div style="height:1500px;">
-    <div v-for="(item,index) in noticelistData" :key="item.notice_id" class="">
-        <!-- リプ -->
-        <div v-if="item.type==2" class="row py-2 px-1 border-bottom">
-            <div class="col-3 left_item">
-                <div class="reply_icon rounded-circle border my-2">
-                    <img class="border rounded-circle" :src="item.icon" alt="">
+<div>
+    <div v-for="(item,index) in noticelistData" :key="index">
+        <!-- 連続がひとつ & リプ -->
+        <div v-if="item.length == 1">
+            <!-- リプ -->
+            <div v-if="item[0].type==2" class="row py-2 px-1 border-bottom">
+                <div class="col-3 left_item">
+                    <div class="reply_icon rounded-circle border my-2">
+                        <img v-if="item[0].icon != ''" class="border rounded-circle" :src="imageLoad(item[0].icon)" alt="">
+                    </div>
+                </div>
+                <div class="col-9 notice_info">
+                    <div class="font-weight-bold">{{item[0].user_name}}</div>
+                    <div class="text-muted small">返信先: {{userInfoArr.name}}さん</div>
+                    {{item[0].reply}}
                 </div>
             </div>
-            <div class="col-9 notice_info">
-                <div class="font-weight-bold">{{item.user_name}}</div>
-                <div class="text-muted small">返信先: {{userInfoArr.name}}さん</div>
-                {{item.reply}}
+            <!-- good,rt -->
+            <div v-else>
+                <div class="row py-2 px-1 border-bottom">
+                    <div class="col-3 left_item" :style="iconColor(item[0].type)">
+                        <div>
+                            <font-awesome-icon :icon="typeObj[item[0].type].fontawesome" class="notice_label"/>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="icon rounded-circle border my-2">
+                            <img v-if="item[0].icon != ''" class="border rounded-circle" :src="imageLoad(item[0].icon)" alt="">
+                        </div>
+                        <div class="notice_info">
+                            <span class="font-weight-bold">{{item[0].user_name}}</span>さん
+                            {{typeObj[item[0].type].message}}
+                        </div>
+                        <div class="text-muted small">
+                            {{item[0].message}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- good,rt -->
         <div v-else>
-            <!-- 通知をまとめる -->
-            <div class="row py-2 px-1 border-bottom" v-if="!(
-                    noticePut(item.type,item.user_post_id,index+1 < noticelistData.length ?
-                    noticelistData[index+1]['type'] : null,index+1 < noticelistData.length ?
-                    noticelistData[index+1]['user_post_id'] : null))
-                    ">
-                <div class="col-3 left_item" :style="iconColor(item.type)">
+            <!-- good,rt -->
+            <div class="row py-2 px-1 border-bottom">
+                <div class="col-3 left_item" :style="iconColor(item[0].type)">
                     <div>
-                        <font-awesome-icon :icon="typeObj[item.type].fontawesome" />
+                        <font-awesome-icon :icon="typeObj[item[0].type].fontawesome" class="notice_label" />
                     </div>
                 </div>
-                <div class="col-9" >
-                    <div class="icon rounded-circle border my-2">
-                        <img class="border rounded-circle" :src="item.icon" alt="">
+                <div class="col-9">
+                    <div class="row mx-0 justify-content-start">
+                        <div class="col-1 px-0 mr-3" v-for="(inner,index) in item" :key="index">
+                            <div class="icon rounded-circle border my-2">
+                                <img v-if="inner.icon != ''" class="border rounded-circle d-inline" :src="imageLoad(inner.icon)" alt="">
+                            </div>
+                        </div>
                     </div>
                     <div class="notice_info">
-                        <span class="font-weight-bold">{{item.user_name}}</span>
-                        {{typeObj[item.type].message}}
+                        <span class="font-weight-bold">{{item[0].user_name}}</span>
+                        と他{{item.length - 1}}人
+                        {{typeObj[item[0].type].message}}
                     </div>
                     <div class="text-muted small">
-                        {{item.message}}
+                        {{item[0].message}}
                     </div>
                 </div>
             </div>
@@ -60,12 +85,12 @@ export default {
             typeObj: { //0:RT,1:GOOD,2:REPLY
                 0: {
                     param: "RT",
-                    message: "さんがあなたの投稿を引用しました",
+                    message: "があなたの投稿を引用しました",
                     fontawesome: 'retweet'
                 },
                 1: {
                     param: "GOOD",
-                    message: "さんがあなたの投稿をいいねしました",
+                    message: "があなたの投稿をいいねしました",
                     fontawesome: 'heart'
                 },
                 2: {
@@ -76,10 +101,11 @@ export default {
             }
         }
     },
-    mounted() {
-    },
+    mounted() {},
     methods: {
-
+        imageLoad(fileName) {
+            return require('../assets/images/' + fileName + '.jpg');
+        },
     },
     computed: {
         iconColor: function () {
@@ -95,16 +121,6 @@ export default {
                 };
             }
         },
-        noticePut: function () {
-            return function (type_id, user_post_id, after_type_id, after_user_post_id) {
-                if (after_type_id === type_id && after_user_post_id === user_post_id) {
-                    //投稿形式とアクションした投稿IDが同じ
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        }
     }
 }
 </script>
@@ -140,5 +156,8 @@ export default {
 
 .notice_info {
     font-size: 16px;
+}
+.notice_label{
+    font-size:20px;
 }
 </style>
