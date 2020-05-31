@@ -4,37 +4,24 @@
         <div class="col-6  py-2 all">すべて</div>
         <div class="col-6  py-2">@投稿</div>
     </div>
-    <NoticeComponent  :noticelistData="noticelist" />
+    <!-- <NoticeComponent  :noticelistData="noticelist"  :userInfoArr="userInfoArr" /> -->
 </div>
 </template>
 
 <script>
 import {innerJoin} from "../assets/js/innerJoin.js";
-import NoticeComponent from '@/components/noticeComponent';
+//import NoticeComponent from '@/components/noticeComponent';
 export default {
     components:{
-        NoticeComponent
+        //NoticeComponent
     },
     data() {
         return {
             noticelist: [],
             noticeArr: [],
             userPostArr: [],
+            userInfoArr:{},
             user: [],
-            typeObj:{//0:RT,1:GOOD,2:REPLY
-                0:{
-                    param:"RT",
-                    message:"さんがあなたのツイートを引用しました"
-                },
-                1:{
-                    param:"GOOD",
-                    message:"さんがあなたのツイートをいいねしました"
-                },
-                2:{
-                    param:"REPLY",
-                    message:""
-                }
-            }
         }
     },
     mounted() {
@@ -44,8 +31,8 @@ export default {
         this.noticeArr = this.$parent.$parent.userNotice;
         this.userPostArr = this.$parent.$parent.userpost;
         this.user = this.$parent.$parent.user;
+        this.userInfoArr = this.$parent.$parent.userInfoArr;
         this.createdNoticeList();
-        console.log(this.noticelist)
     },
     methods: {
         createdNoticeList() {
@@ -54,7 +41,8 @@ export default {
                     fk_user_post_id,
                     notice_id,
                     fk_user_id,
-                    type
+                    type,
+                    reply
                 }, {
                     user_post_id,
                     message
@@ -63,14 +51,16 @@ export default {
                     fk_user_id,
                     notice_id,
                     message,
+                    reply,
                     type
                 });
-            this.noticelist = innerJoin(userPostNoticeMrg,this.user,
+            var tmpArr = innerJoin(userPostNoticeMrg,this.user,
                 ({
                     user_post_id,
                     fk_user_id,
                     notice_id,
                     message,
+                    reply,
                     type
                 }, {
                     user_id,
@@ -83,8 +73,23 @@ export default {
                     fk_user_id,
                     notice_id,
                     message,
+                    reply,
                     type
                 });
+                var before_type_id;
+                var before_user_post_id ;
+                var i = 0;
+                tmpArr.forEach((el,inx,arr) => {
+                    before_type_id = arr[inx-1] != undefined ? arr[inx-1].type : "" ;
+                    before_user_post_id = arr[inx-1]  != undefined ? arr[inx-1].user_post_id : "" ;
+                    if(before_type_id == el.type && before_user_post_id == el.user_post_id ){
+                        tmpArr[i-1].push(el);
+                    }else{
+                        tmpArr[i] = [el];
+                        i++;
+                    }
+                });
+                this.noticelist = tmpArr;
         },
     }
 }
