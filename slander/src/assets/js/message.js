@@ -1,13 +1,13 @@
 export let line = [
     {
         param:'0',
-        name:'友達',
+        name:'親友',
         message:'あの写真投稿しておいて！'
     },
     {
         param:'1',
-        name:'友達',
-        message:'あの写真投稿しておいて！'
+        name:'親友',
+        message:'めっちゃ炎上してね？はやく消せ。'
     },
     {
         param:'2',

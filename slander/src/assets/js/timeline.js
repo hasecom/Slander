@@ -2,6 +2,7 @@ export let timeline01 = [
     {
         id:"0",
         name:'これっち',
+        type:0,//0は他人1は自分
         message:'最近坊主にしたよ',
         imagePath:"",
         iconPath:"",
@@ -13,6 +14,7 @@ export let timeline01 = [
     {
         id:"1",
         name:'きき',
+        type:0,//0は他人1は自分
         message:'頑張ってる人を応援したい！',
         imagePath:"",
         iconPath:"",
@@ -24,6 +26,7 @@ export let timeline01 = [
     {
         id:"2",
         name:'ふわっち',
+        type:0,//0は他人1は自分
         message:'今日は疲れたー',
         imagePath:"",
         iconPath:"",
@@ -35,6 +38,7 @@ export let timeline01 = [
     {
         id:"3",
         name:'たなか',
+        type:0,//0は他人1は自分
         message:'楽しいな',
         imagePath:"",
         iconPath:"",
@@ -45,7 +49,8 @@ export let timeline01 = [
     },
     {
         id:"4",
-        name:'くりすます・らぶ',
+        name:'くりすます',
+        type:0,//0は他人1は自分
         message:'今日は仕事だ',
         imagePath:"",
         iconPath:"",
@@ -57,6 +62,7 @@ export let timeline01 = [
     {
         id:"5",
         name:'名無し',
+        type:0,//0は他人1は自分
         message:'なにこれｗｗｗ',
         imagePath:"",
         iconPath:"",
@@ -68,6 +74,7 @@ export let timeline01 = [
     {
         id:"6",
         name:'かほ',
+        type:0,//0は他人1は自分
         message:'最近嫌なことばっかで本当にネガティブになる・・・本当に嫌だな。辛いな帰りたいな',
         imagePath:"",
         iconPath:"",
@@ -79,6 +86,7 @@ export let timeline01 = [
     {
         id:"7",
         name:'しんじ',
+        type:0,//0は他人1は自分
         message:'今日スロットで激アツ演出やった！！！最高すぎまじGODwwww',
         imagePath:"",
         iconPath:"",
@@ -90,6 +98,7 @@ export let timeline01 = [
     {
         id:"8",
         name:'がんばるちゃん',
+        type:0,//0は他人1は自分
         message:'かなしいな。うまくいかないけどがんばろう。わたし頑張る',
         imagePath:"",
         iconPath:"",

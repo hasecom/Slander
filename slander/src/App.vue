@@ -208,11 +208,11 @@ export default {
                 //タイムラインの表示
                 self.timeLine.forEach(el => {
                     if (el.id == self.userStory.BurnId) {
-                        if(randType == 0){ //0:RT,1:GOOD,2:REPLY
+                        if (randType == 0) { //0:RT,1:GOOD,2:REPLY
                             el.repost = el.repost + 1;
-                        }else if(randType == 1){
+                        } else if (randType == 1) {
                             el.good = el.good + 1;
-                        }else{
+                        } else {
                             el.replyCnt = el.replyCnt + 1;
                         }
                     }
@@ -228,9 +228,14 @@ export default {
             }
             timerId(0);
         },
-        InloopAction(counter){
-            if(counter == 20){
-                console.log("haaha")
+        InloopAction(counter) {
+            if (counter == 20) {
+                this.Terminal_notice_name = message['line']['1']['name'];
+                this.Terminal_notice_message = message['line']['1']['message'];
+                var self = this;
+                setTimeout(function () {
+                    self.IsterminalNotice = true;
+                }, 2 * 1000);
             }
         },
         handleScroll() {

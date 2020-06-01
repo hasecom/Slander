@@ -60,7 +60,8 @@ export default {
 .notice {
     position: fixed;
     width: 90%;
-    height: 80px;
+    height: 90px;
+    font-size:15px;
     margin: 0 auto;
     left: 0;
     right: 0;

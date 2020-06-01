@@ -63,6 +63,7 @@ export default {
                 this.$parent.timeLine.push({
                     id: this.$parent.userStory.BurnId,
                     name: this.userInfoArr['name'],
+                    type:1,
                     message: postFirstAction.message,
                     imagePath: postFirstAction.imagePath,
                     iconPath: this.userInfoArr['icon'],
