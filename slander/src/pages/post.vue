@@ -17,7 +17,7 @@
         <div class="post-textarea col-9">
             <textarea name="" id="postTextarea" cols="20" rows="4" placeholder="いまなにしてる？" v-bind:readonly="is_readonly"></textarea>
             <div class="first_post_img" v-if="this.$parent.userStory != undefined ? !this.$parent.userStory['firstPost'] : false">
-                <img class="border" :src="imageLoad(this.$parent.userStory['firstPostImgName'])" alt="">
+                <img class="border" :src="imageLoad(this.$parent.userStory['postAction'][0].imagePath)" alt="">
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@ export default {
         if (this.$parent.userStory != undefined) {
             //初回投稿前
             if (!this.$parent.userStory['firstPost']) {
-                $('#postTextarea').val(this.$parent.userStory['firstPostMessage']);
+                $('#postTextarea').val(this.$parent.userStory['postAction'][0].message);
             } else {
                 this.is_readonly = false;
             }
@@ -56,19 +56,32 @@ export default {
         post() {
             //投稿ボタンを押したら
             this.$router.push('/')
+            var postFirstAction = this.$parent.userStory['postAction'][0];
 
             //初回
             if (!this.$parent.userStory['firstPost']) {
-                this.$parent.timeLine.unshift({
-                    id: this.$parent.timeLine.length + 1,
+                this.$parent.timeLine.push({
+                    id: this.$parent.userStory.BurnId,
                     name: this.userInfoArr['name'],
-                    message: this.$parent.userStory['firstPostMessage'],
-                    imagePath: this.$parent.userStory['firstPostImgName'],
+                    message: postFirstAction.message,
+                    imagePath: postFirstAction.imagePath,
                     iconPath: this.userInfoArr['icon'],
                     good: 0,
                     repost: 0,
+                    replyCnt:0,
                     timestamp: ""
                 });
+                this.$parent.userpost.push({
+                    user_post_id: this.$parent.userStory.BurnId,
+                    name: this.userInfoArr['name'],
+                    message: postFirstAction.message,
+                    imagePath: postFirstAction.imagePath,
+                    iconPath: this.userInfoArr['icon'],
+                    good: 0,
+                    repost: 0,
+                    replyCnt:0,
+                    timestamp: ""
+                })
                 this.$parent.userStory.firstPostFnc();
                 this.$parent.first_post_after();
             }

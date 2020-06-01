@@ -49,12 +49,13 @@ export default {
                     for (var i = 0; i < this.difference; i++) {
                         $("#noticeComponent").children().eq(i).css("background", 'rgba(237,245,253,1)')
                     }
+                    
                     var self = this;
                     setTimeout(function () {
                         for (var i = 0; i < self.difference; i++) {
                             $("#noticeComponent").children().eq(i).css("background", 'white');
                         }
-                    }, 2 * 1000);
+                    }, 4 * 1000);
                     this.$parent.$parent.beforenoticelistLength = 0
                 })
             }

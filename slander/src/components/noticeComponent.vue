@@ -1,6 +1,6 @@
 <template>
 <div id="noticeComponent">
-    <div v-for="(item,index) in noticelistData" :key="index">
+    <div v-for="(item,index) in noticelistData.slice().reverse()" :key="index">
         <!-- 連続がひとつ & リプ -->
         <div v-if="item.length == 1">
             <!-- リプ -->
@@ -65,7 +65,7 @@
                 <div class="col-9">
                     <div class="row mx-0 justify-content-start">
                         <div class="col-1 px-0 mr-3" v-for="(inner,index) in item" :key="index">
-                            <div class="icon rounded-circle border my-2">
+                            <div class="icon rounded-circle border my-2" v-if="index < 6">
                                 <img v-if="inner.icon != ''" class="border rounded-circle d-inline" :src="imageLoad(inner.icon)" alt="">
                             </div>
                         </div>

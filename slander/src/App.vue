@@ -3,7 +3,7 @@
     <TerminalNotice v-if="IsterminalNotice" :terminal_notice_name="Terminal_notice_name" :terminal_notice_message="Terminal_notice_message" />
     <div id="content">
         <Header :userInfoLabel="userInfoArr" :PageTitle="pageTitle" />
-        <pull-to :top-load-method="refresh" v-if="!IsOpenOtherPage" :top-config="config"  @top-state-change="stateChange" :is-bottom-bounce="false" :is-top-bounce="movepullTo">
+        <pull-to :top-load-method="refresh" v-if="!IsOpenOtherPage" :top-config="config" @top-state-change="stateChange" :is-bottom-bounce="false" :is-top-bounce="movepullTo">
             <div id="main">
                 <router-view ref="router_view"></router-view>
             </div>
@@ -56,13 +56,13 @@ export default {
     },
     data() {
         return {
-            userStory: [],
+            userStory: [], //サイト内ストーリのイベント
             userInfoArr: [],
             siteInfoArr: [],
-            timeLine: [],
-            user: [],
-            userpost: [],
-            userNotice: [],
+            timeLine: [], //タイムライン情報
+            user: [], //自分以外のユーザ情報
+            userpost: [], //ユーザの投稿
+            userNotice: [], //ユーザの通知情報
             pageTitle: '',
             pageParam: '',
             beforePagePath: '/', //投稿画面用(戻ったときにさっきいたページ)
@@ -73,7 +73,8 @@ export default {
             Terminal_notice_name: '', //端末通知名
             Terminal_notice_message: '', //端末通知メッセージ
             notice_count: 0, //通知件数
-            beforenoticelistLength:0, //通知の配列length
+            beforenoticelistLength: 0, //通知の配列length
+            ExistBurnPost: true, //炎上投稿を削除したかどうか false->削除済み
             config: {
                 pullText: '',
                 triggerText: '',
@@ -105,7 +106,9 @@ export default {
     },
     methods: {
         story() {
-            //友人からのlineがくる
+            //-------------------------
+            //１、友人からTwitterでバズる画像を投稿してくれと催促される。
+            //-------------------------
             this.Terminal_notice_name = message['line']['0']['name'];
             this.Terminal_notice_message = message['line']['0']['message'];
             var self = this;
@@ -114,19 +117,91 @@ export default {
             }, 2 * 1000);
         },
         first_post_after() {
+            //-------------------------
+            //２、フォロワーから消した方がいいよ？と忠告される。
+            //-------------------------
             var self = this;
             setTimeout(function () {
-                //通知が来る
-                self.notice_count = 1;
-                console.log(self.userStory)
-                self.userNotice.unshift({
-                    notice_id: 7, //通知ID
-                    fk_user_post_id: 2, //投稿ID
-                    fk_user_id: 1,
-                    reply: "さすがにそれまずくね？",
-                    type: 2 //0:RT,1:GOOD,2:REPLY
-                })
+                //通知
+                var beforeNotice = self.userNotice.length
+
+                self.userStory.noticeAction.forEach(el => {
+                    self.userNotice.push({
+                        notice_id: el.notice_id, //通知ID
+                        fk_user_post_id: self.userStory.BurnId, //投稿ID
+                        fk_user_id: el.fk_user_id,
+                        reply: el.reply,
+                        type: el.type //0:RT,1:GOOD,2:REPLY
+                    })
+                });
+                //通知表示件数
+                self.notice_count = (self.userNotice.length) - beforeNotice;
+
+                self.timeLine.forEach(el => {
+                    if (el.id == self.userStory.BurnId) {
+                        el.replyCnt = 1;
+                        el.good = 1;
+                    }
+                });
+                self.help_reply_after();
             }, 3 * 1000);
+        },
+        help_reply_after() {
+            //-------------------------
+            //３、○秒以内に投稿を消すか消さないかでイベントを変える
+            //-------------------------
+            let self = this;
+            //○秒後まで投稿が残っていた場合
+            setTimeout(function () {
+                var beforeNotice = self.userNotice.length
+                self.userStory.noticeAction2.forEach(el => {
+                    self.userNotice.push({
+                        notice_id: el.notice_id, //通知ID
+                        fk_user_post_id: self.userStory.BurnId, //投稿ID
+                        fk_user_id: el.fk_user_id,
+                        reply: el.reply,
+                        type: el.type //0:RT,1:GOOD,2:REPLY
+                    })
+                });
+                self.notice_count = (self.userNotice.length) - beforeNotice + self.notice_count;
+                //タイムラインの表示
+                self.timeLine.forEach(el => {
+                    if (el.id == self.userStory.BurnId) {
+                        el.repost = el.repost + 1;
+                        el.good = el.good + 1;
+                    }
+                });
+                //最初のRT後に炎上する流れ
+                setTimeout(function () {
+                    self.toburnStart();
+                }, 2 * 1000);
+            }, 2 * 1000);
+        },
+        toburnStart() {
+            var self = this;
+            var count = 0;
+            var timerId = setInterval(function () {
+                var beforeNotice = self.userNotice.length
+                self.userNotice.push({
+                    notice_id: self.userNotice.length, //通知ID
+                    fk_user_post_id: self.userStory.BurnId, //投稿ID
+                    fk_user_id: 19,
+                    reply: "",
+                    type: 0 //0:RT,1:GOOD,2:REPLY
+                });
+                //タイムラインの表示
+                self.timeLine.forEach(el => {
+                    if (el.id == self.userStory.BurnId) {
+                        el.repost = el.repost + 1;
+                        //el.good = el.good + 1;
+                    }
+                });
+                self.notice_count = (self.userNotice.length) - beforeNotice + self.notice_count;
+                if (count >= 10 || !self.ExistBurnPost) {
+                    clearInterval(timerId);
+                }
+                count++;
+            }, 500);
         },
         handleScroll() {
             if (window.scrollY < 30) {
@@ -167,14 +242,14 @@ export default {
         },
         refresh(loaded) {
             loaded('done');
-            if(this.pageParam == "home"){
+            if (this.pageParam == "home") {
                 console.log("homeスワイプ ")
-            }else if(this.pageParam == "notice"){
+            } else if (this.pageParam == "notice") {
                 //通知スワイプ
                 this.$refs.router_view._mounted();
-            }else if(this.pageParam == "search"){
+            } else if (this.pageParam == "search") {
                 console.log("検索スワイプ ")
-            }else if(this.pageParam == "dm"){
+            } else if (this.pageParam == "dm") {
                 console.log("dmスワイプ ")
             }
         }

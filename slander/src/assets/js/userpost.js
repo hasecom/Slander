@@ -1,10 +1,11 @@
 export let userPost = [
     {
-        user_post_id:2,
+        user_post_id:0,
         message:'みんなおやすみ！',
         imagePath:"",
         good:0,
         repost:0,
+        replyCnt:0,
         timestamp:"5時間前"
     },
     {
@@ -13,14 +14,16 @@ export let userPost = [
         imagePath:"",
         good:0,
         repost:0,
+        replyCnt:0,
         timestamp:"5時間前"
     },
     {
-        user_post_id:0,
+        user_post_id:2,
         message:'めっせーじ２',
         imagePath:"",
         good:0,
         repost:0,
+        replyCnt:0,
         timestamp:"4時間前"
     }
 ]

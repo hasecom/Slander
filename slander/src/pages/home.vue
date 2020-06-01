@@ -26,12 +26,15 @@
                     <div class="row text-muted text-center pt-3">
                         <div class="col-3 px-0">
                             <font-awesome-icon icon="comment" />
+                            <span class="px-1 small" v-show="item.replyCnt > 0">{{item.replyCnt}}</span>
                         </div>
                         <div class="col-3 px-0">
                             <font-awesome-icon icon="retweet" />
+                            <span class="px-1 small" v-show="item.repost > 0" >{{item.repost}}</span>
                         </div>
                         <div class="col-3 px-0">
                             <font-awesome-icon icon="heart" />
+                            <span class="px-1 small"  v-show="item.good > 0">{{item.good}}</span>
                         </div>
                         <div class="col-3 px-0">
                             <font-awesome-icon icon="external-link-alt" />
@@ -52,7 +55,7 @@ export default {
         }
     },
     mounted() {
-        this.timeline = this.$parent.$parent.timeLine;
+        this.timeline = (this.$parent.$parent.timeLine).slice().reverse();
     },
     methods: {
         imageLoad(fileName) {
