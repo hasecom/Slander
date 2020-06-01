@@ -38,6 +38,7 @@ import * as TimeLine from "./assets/js/timeline.js";
 import * as User from "./assets/js/user.js";
 import * as UserPost from "./assets/js/userpost.js";
 import * as UserNotice from "./assets/js/usernotice.js";
+import * as fnc from "./assets/js/fnc.js";
 
 export default {
     name: 'App',
@@ -178,30 +179,59 @@ export default {
             }, 2 * 1000);
         },
         toburnStart() {
+            //-------------------------
+            //4、炎上開始
+            //-------------------------
             var self = this;
-            var count = 0;
-            var timerId = setInterval(function () {
+            //-ユーザID（x++） 初期値
+            var count_user_id = 20;
+
+            //炎上ループ
+            var timerId = function (counter) {
+                //-ループの時間(ランダム)範囲設定
+                var loopTime = fnc.getRandomInt(300, 1000);
+                //-type(RTかGOODかREPLY)->ランダム
+                var randType = fnc.getRandomInt(0, 3);
+                var reply = "";
+                //-リプライ->typeがREPLYの場合配列からランダムで取り出す
+                if (randType == 2) {
+                    reply = self.userStory.abusive[fnc.getRandomInt(1, 30) - 1];
+                }
                 var beforeNotice = self.userNotice.length
                 self.userNotice.push({
                     notice_id: self.userNotice.length, //通知ID
                     fk_user_post_id: self.userStory.BurnId, //投稿ID
-                    fk_user_id: 19,
-                    reply: "",
-                    type: 0 //0:RT,1:GOOD,2:REPLY
+                    fk_user_id: count_user_id + counter,
+                    reply: reply,
+                    type: randType //0:RT,1:GOOD,2:REPLY
                 });
                 //タイムラインの表示
                 self.timeLine.forEach(el => {
                     if (el.id == self.userStory.BurnId) {
-                        el.repost = el.repost + 1;
-                        //el.good = el.good + 1;
+                        if(randType == 0){ //0:RT,1:GOOD,2:REPLY
+                            el.repost = el.repost + 1;
+                        }else if(randType == 1){
+                            el.good = el.good + 1;
+                        }else{
+                            el.replyCnt = el.replyCnt + 1;
+                        }
                     }
                 });
                 self.notice_count = (self.userNotice.length) - beforeNotice + self.notice_count;
-                if (count >= 10 || !self.ExistBurnPost) {
-                    clearInterval(timerId);
+                self.InloopAction(counter);
+                if (counter < 130 && self.ExistBurnPost) {
+                    setTimeout(function () {
+                        counter++;
+                        timerId(counter);
+                    }, loopTime);
                 }
-                count++;
-            }, 500);
+            }
+            timerId(0);
+        },
+        InloopAction(counter){
+            if(counter == 20){
+                console.log("haaha")
+            }
         },
         handleScroll() {
             if (window.scrollY < 30) {

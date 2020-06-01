@@ -93,9 +93,9 @@ export let timeline01 = [
         message:'かなしいな。うまくいかないけどがんばろう。わたし頑張る',
         imagePath:"",
         iconPath:"",
-        good:23,
+        good:13,
         repost:1,
-        replyCnt:13,
+        replyCnt:3,
         timestamp:"9時間前"
     },
 ]

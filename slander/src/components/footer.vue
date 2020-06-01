@@ -1,7 +1,7 @@
 <template>
     <div id="footer" class="fixed-bottom">
         <div class="row  footer_menu_wrapper">
-            <div :id="item['param']" :data-item="$parent.notice_count" class="text-center col-3" v-for="item in siteInfoLabel" :key="item['param']">
+            <div :id="item['param']" :data-item="$parent.notice_count < 21 ? $parent.notice_count : 20" class="text-center col-3" v-for="item in siteInfoLabel" :key="item['param']">
                 <router-link :to="item['path']" tag='button' class="btn footer-router-link">
                     <font-awesome-icon :icon="item['fontawesome']" :style="selectPage(item['path'])" />
                 </router-link>

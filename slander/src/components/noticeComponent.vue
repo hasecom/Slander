@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-9 notice_info">
                     <div class="font-weight-bold">{{item[0].user_name}}</div>
-                    <div class="text-muted small">返信先: {{userInfoArr.name}}さん</div>
+                    <div class="text-muted small">返信先: <span class="reply_text">{{userInfoArr.name}}さん</span></div>
                     {{item[0].reply}}
                     <div class="row text-muted text-center pt-3">
                         <div class="col-3 px-0">
@@ -181,6 +181,9 @@ export default {
 
 .notice_label {
     font-size: 20px;
+}
+.reply_text{
+    color:#00acee;
 }
 
 </style>
