@@ -1,8 +1,26 @@
 export let userDm = [
     {
         dm_id:0,//通知ID
+        fk_user_id:2,//ユーザID
+        message:"おやすみ",
+        read:0 //0は既読 1は未読
+    },
+    {
+        dm_id:1,//通知ID
         fk_user_id:1,//ユーザID
-        message:"aa",
+        message:"あなた：いつも相談乗ってくれてありがとうね。",
+        read:0 //0は既読 1は未読
+    },
+    {
+        dm_id:2,//通知ID
+        fk_user_id:3,//ユーザID
+        message:"本に落書きした写真バズるぞ〜ｗ",
+        read:0 //0は既読 1は未読
+    },
+    {
+        dm_id:3,//通知ID
+        fk_user_id:4,//ユーザID
+        message:"明日の課題やった？ｗ",
         read:0 //0は既読 1は未読
     }
 ]

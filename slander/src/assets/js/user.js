@@ -16,7 +16,7 @@ export let user = [
     },
     {
         user_id:3,
-        user_name:'かずえ',
+        user_name:'親友タロー',
         icon:'',
     },
     {

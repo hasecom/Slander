@@ -410,4 +410,10 @@ export default {
     width: 25px;
     height: 25px;
 }
+.vue-pull-to-wrapper{
+    background:white;
+}
+#content{
+    background:rgba(231,235,239);
+}
 </style>
