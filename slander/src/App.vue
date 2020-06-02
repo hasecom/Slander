@@ -40,6 +40,7 @@ import * as TimeLine from "./assets/js/timeline.js";
 import * as User from "./assets/js/user.js";
 import * as UserPost from "./assets/js/userpost.js";
 import * as UserNotice from "./assets/js/usernotice.js";
+import * as UserDm from "./assets/js/userDm.js";
 import * as fnc from "./assets/js/fnc.js";
 import * as EndRollInfo from "./assets/js/endRoll.js";
 
@@ -89,6 +90,7 @@ export default {
             user: [], //自分以外のユーザ情報
             userpost: [], //ユーザの投稿
             userNotice: [], //ユーザの通知情報
+            userDm:[],//ユーザDMの通知情報
             pageTitle: '',
             pageParam: '',
             beforePagePath: '/', //投稿画面用(戻ったときにさっきいたページ)
@@ -128,6 +130,7 @@ export default {
         this.user = User['user'];
         this.userpost = UserPost['userPost'];
         this.userNotice = UserNotice['userNotice'];
+        this.userDm = UserDm['userDm'];
         this.endRollArr = EndRollInfo['endRoll'];
     },
     mounted() {
