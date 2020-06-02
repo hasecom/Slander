@@ -77,9 +77,12 @@ export default {
         }
     },
     mounted() {
-        this.timeline = (this.$parent.$parent.timeLine).slice().reverse();
+        this.updateTimeLine();
     },
     methods: {
+        updateTimeLine() {
+            this.timeline = (this.$parent.$parent.timeLine).slice().reverse();
+        },
         imageLoad(fileName) {
             return require('../assets/images/' + fileName + '.jpg');
         },

@@ -22,7 +22,7 @@ export let line = [
     {
         param:'4',
         name:'父',
-        message:'Twitterを見たぞ。今すぐ投稿を消せ。'
+        message:'投稿を見たぞ。今すぐ投稿を消せ。'
     },
     {
         param:'5',

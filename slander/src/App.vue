@@ -43,7 +43,6 @@ import * as UserNotice from "./assets/js/usernotice.js";
 import * as fnc from "./assets/js/fnc.js";
 import * as EndRollInfo from "./assets/js/endRoll.js";
 
-
 export default {
     name: 'App',
     components: {
@@ -74,6 +73,7 @@ export default {
                     setTimeout(function () {
                         self.endPatternStr = '親友が炎上・誹謗中傷';
                         self.EndRaul = true;
+                        self.IsEnd = true;
                     }, 8 * 1000);
                 }, 2 * 1000);
             }
@@ -100,12 +100,15 @@ export default {
             Terminal_notice_message: '', //端末通知メッセージ
             Terminal_notice_type: 0, //lime - 0 mail - 1
             notice_count: 0, //通知件数
+            dm_count:0,//dmの通知件数
             beforenoticelistLength: 0, //通知の配列length
             ExistBurnPost: true, //炎上投稿を削除したかどうか false->削除済み
-            IsTimeOut: false, //炎上投稿を消すタイミング次第でイベント変更
+            IsTimeOut: false, //炎上投稿を消すタイミング次第でイベント変更->炎上済み
             EndRaul: false,
+            IsEnd: false, //エンドロール流れたか?
+            homeSwipeCnt: 0,
             endRollArr: [],
-            endPatternStr:'',
+            endPatternStr: '',
             config: {
                 pullText: '',
                 triggerText: '',
@@ -133,7 +136,6 @@ export default {
         }
         this.changePath(this.beforePagePath);
         window.addEventListener('scroll', this.handleScroll);
-
         this.story();
     },
     methods: {
@@ -171,7 +173,7 @@ export default {
                     }
                 });
                 self.help_reply_after();
-            }, 3 * 1000);
+            }, 5 * 1000);
         },
         help_reply_after() {
             //-------------------------
@@ -200,8 +202,10 @@ export default {
                 });
                 //最初のRT後に炎上する流れ
                 setTimeout(function () {
-                    self.toburnStart();
-                }, 2 * 1000);
+                    if (self.ExistBurnPost) {
+                        self.toburnStart();
+                    }
+                }, 3 * 1000);
             }, 2 * 1000);
         },
         toburnStart() {
@@ -320,7 +324,7 @@ export default {
         refresh(loaded) {
             loaded('done');
             if (this.pageParam == "home") {
-                console.log("homeスワイプ ")
+                this.homeSwipeEvent();
             } else if (this.pageParam == "notice") {
                 //通知スワイプ
                 this.$refs.router_view._mounted();
@@ -328,6 +332,52 @@ export default {
                 console.log("検索スワイプ ")
             } else if (this.pageParam == "dm") {
                 console.log("dmスワイプ ")
+            }
+        },
+        homeSwipeEvent() {
+            if (this.homeSwipeCnt == 9) {
+                //エンディングを迎えていない&&炎上投稿をしていない
+                if (!this.IsEnd && this.ExistBurnPost && !this.IsTimeOut) {
+                    var post = this.userStory.timeLineSwipePost;
+                    this.timeLine.push({
+                        id: this.timeLine.length,
+                        name: post.name,
+                        type: post.type, //0は他人
+                        message: post.message,
+                        imagePath: post.imagePath,
+                        iconPath: post.iconPath,
+                        good: post.good,
+                        repost: post.repost,
+                        replyCnt: post.replyCnt,
+                        timestamp: post.timestamp
+                    });
+                    this.$refs.router_view.updateTimeLine();
+                    this.homeSwipeCnt = 10;
+                    var self = this;
+                    setTimeout(function () {
+                        self.endPatternStr = '情報モラルのあるスワイプマスター';
+                        self.EndRaul = true;
+                        self.IsEnd = true;
+                    }, 4 * 1000);
+                } else if (this.IsEnd && !this.ExistBurnPost && !this.IsTimeOut) {
+                    var post2 = this.userStory.timeLineSwipePostEd1;
+                    this.timeLine.push({
+                        id: this.timeLine.length,
+                        name: post2.name,
+                        type: post2.type, //0は他人
+                        message: post2.message,
+                        imagePath: post2.imagePath,
+                        iconPath: post2.iconPath,
+                        good: post2.good,
+                        repost: post2.repost,
+                        replyCnt: post2.replyCnt,
+                        timestamp: post2.timestamp
+                    });
+                    this.$refs.router_view.updateTimeLine();
+                    this.homeSwipeCnt = 10;
+                }
+            } else if (this.homeSwipeCnt < 9) {
+                this.homeSwipeCnt = this.homeSwipeCnt + 1;
             }
         }
     }

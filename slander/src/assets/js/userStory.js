@@ -4,7 +4,31 @@ export let start = false;
 export let firstPost = false;
 //炎上投稿ID
 export let BurnId = 'qwerty';
-
+//スワイプ連続時ユーザ投稿
+export let timeLineSwipePost = {
+    id: '',
+    name: 'きき',
+    type:0, //0は他人
+    message: '投稿をする前に、他人を傷つける投稿じゃないか考えるのって大切だよね。',
+    imagePath:'',
+    iconPath:'',
+    good: 0,
+    repost: 0,
+    replyCnt: 0,
+    timestamp: ""
+}
+export let timeLineSwipePostEd1 = {
+    id: '',
+    name: 'きき',
+    type:0, //0は他人
+    message: 'うんこなう',
+    imagePath:'',
+    iconPath:'',
+    good: 0,
+    repost: 0,
+    replyCnt: 0,
+    timestamp: "" 
+}
 export function firstPostFnc(){
     firstPost = true;
 }

@@ -7,7 +7,7 @@
             </router-link>
         </div>
         <div class="col-10 text-right">
-            <button type="button" class="btn btn-sm send-btn rounded-pill" @click="post">投稿する</button>
+            <button type="button" class="btn btn-sm send-btn rounded-pill" @click="post" :disabled="this.$parent.IsEnd && this.$parent.ExistBurnPost ? true : false">投稿する</button>
         </div>
     </div>
     <div class="post-main row">
