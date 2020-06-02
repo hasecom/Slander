@@ -41,6 +41,7 @@ import * as User from "./assets/js/user.js";
 import * as UserPost from "./assets/js/userpost.js";
 import * as UserNotice from "./assets/js/usernotice.js";
 import * as UserDm from "./assets/js/userDm.js";
+import * as UserDmDynamic from "./assets/js/userDmDynamic.js";
 import * as fnc from "./assets/js/fnc.js";
 import * as EndRollInfo from "./assets/js/endRoll.js";
 
@@ -68,7 +69,6 @@ export default {
                 }, 2 * 1000);
             } else {
                 //炎上を防げた->end
-
                 setTimeout(function () {
                     self.terminal_notice_set_fnc(message['line']['5']['name'], message['line']['5']['message'], 0);
                     setTimeout(function () {
@@ -110,6 +110,7 @@ export default {
             IsEnd: false, //エンドロール流れたか?
             homeSwipeCnt: 0,
             endRollArr: [],
+            userDmDynamic:[],
             endPatternStr: '',
             config: {
                 pullText: '',
@@ -118,7 +119,8 @@ export default {
                 doneText: ''
             },
             otherPagePath: [
-                '/post'
+                '/post',
+                '/dm/'
             ]
         }
     },
@@ -132,6 +134,7 @@ export default {
         this.userNotice = UserNotice['userNotice'];
         this.userDm = UserDm['userDm'];
         this.endRollArr = EndRollInfo['endRoll'];
+        this.userDmDynamic = UserDmDynamic['userDmDynamic'];
     },
     mounted() {
         if (this.$route.path != '/') {
@@ -303,9 +306,14 @@ export default {
                     this.IsOpenOtherPage = false;
                 }
             });
+
             this.otherPagePath.forEach(el => {
-                if (el == this.$route.path) {
+                if (el == this.$route.path ) {
                     this.IsOpenOtherPage = true;
+                }else if((this.$route.path).match(/\d/) != null){
+                    if(el + (this.$route.path).match(/\d/)[0] == this.$route.path){
+                        this.IsOpenOtherPage = true;
+                    }
                 }
             });
         },

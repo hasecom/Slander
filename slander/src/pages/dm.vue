@@ -1,7 +1,7 @@
 <template>
 <div>
     <ul>
-        <router-link to="path" tag="li" v-for="(item,index) in dmArr" :key="index" class="row mg-0 border-bottom dm">
+        <router-link :to="'dm/'+item.dm_id" tag="li" v-for="(item,index) in dmArr" :key="index" class="row mg-0 border-bottom dm">
             <div class="col-3 px-0 left_item">
                 <div class="reply_icon rounded-circle border my-2">
                     <img v-if="item.icon != ''" class="border rounded-circle" :src="imageLoad(item.icon)" alt="">
@@ -79,16 +79,6 @@ export default {
     object-fit: cover;
 }
 
-.icon {
-    width: 30px;
-    height: 30px;
-}
-
-.icon>img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
 .dm {
     padding: 5px 30px;
@@ -98,7 +88,8 @@ export default {
     max-height: 50px;
     overflow-y: hidden;
 }
-ul{
-    padding:0px;
+
+ul {
+    padding: 0px;
 }
 </style>
