@@ -48,22 +48,16 @@
         </div>
     </div>
     <div class="under_details_wappers" v-if="isUnderDetails" @click.self="detailsClose()">
-        <div class="under_details">
-            <div class="text-center text-muted">
-                <font-awesome-icon icon="minus" />
-            </div>
+        <div class="under_details ">
             <div>
                 <div class="row mx-0 under_details_msg">
-                    <div class="col-3">
-                        <font-awesome-icon icon="trash-alt" />
-                    </div>
                     <div class="col8" @click="deleteTweet">
                         ツイートを削除
                     </div>
                 </div>
             </div>
             <div class="under_details_cancel_btn_wrapper">
-                <div class="under_details_cancel_btn btn border rounded-pill" @click="detailsClose()">
+                <div class="under_details_cancel_btn btn border rounded-pill " @click="detailsClose()">
                     キャンセル
                 </div>
             </div>
@@ -90,35 +84,31 @@ export default {
             return require('../assets/images/' + fileName + '.jpg');
         },
         home_detail(item) {
+            $('body').css('overflow', 'hidden');
+            $('body').css('position', 'fixed');
             this.selectItem = item;
             this.isUnderDetails = true;
-            this.$nextTick(function () {
-                $('.under_details').animate({
-                    height: "150px"
-                }, 100);
 
-            });
         },
         detailsClose() {
+            $('body').css('overflow', 'auto');
+            $('body').css('position', 'static');
             var self = this;
-            $('.under_details').animate({
-                height: "0px"
-            }, 100, function () {
-                self.isUnderDetails = false;
-            })
+            self.isUnderDetails = false;
+
         },
         deleteTweet() {
             var deleteNum = 0;
             this.$parent.$parent.timeLine.slice().reverse().forEach((el, index) => {
                 if (el.id == this.selectItem.id) {
                     deleteNum = index;
-                    if(this.$parent.$parent.userStory.BurnId == el.id){
+                    if (this.$parent.$parent.userStory.BurnId == el.id) {
                         this.$parent.$parent.ExistBurnPost = false;
                     }
                 }
             });
-            this.timeline.splice(deleteNum,1)
-            this.$parent.$parent.timeLine.splice(this.timeline.length - deleteNum,1);
+            this.timeline.splice(deleteNum, 1)
+            this.$parent.$parent.timeLine.splice(this.timeline.length - deleteNum, 1);
             this.detailsClose();
         }
     }
@@ -169,13 +159,15 @@ export default {
 }
 
 .under_details {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    height: 0px;
+    height: 150px;
     bottom: 0;
+    top: 0;
+    right: 0;
+    left: 0;
     background: white;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    z-index: 30;
 }
 
 .under_details_cancel_btn {

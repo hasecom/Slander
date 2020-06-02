@@ -10,16 +10,16 @@ export let userPost = [
     },
     {
         user_post_id:1,
-        message:'めっせーじ１',
+        message:'あしたバズる投稿するねｗお楽しみにw',
         imagePath:"",
         good:0,
         repost:0,
         replyCnt:0,
-        timestamp:"5時間前"
+        timestamp:"1日前"
     },
     {
         user_post_id:2,
-        message:'めっせーじ２',
+        message:'人生何とかなる',
         imagePath:"",
         good:0,
         repost:0,

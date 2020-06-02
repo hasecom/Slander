@@ -1,6 +1,7 @@
 <template>
 <div id="app">
-    <TerminalNotice v-if="IsterminalNotice" :terminal_notice_name="Terminal_notice_name" :terminal_notice_message="Terminal_notice_message" />
+    <EndRoll v-if="EndRaul" :EndRollArr="endRollArr" :EndPattern="endPatternStr" />
+    <TerminalNotice v-if="IsterminalNotice" :terminal_notice_name="Terminal_notice_name" :terminal_notice_message="Terminal_notice_message" :terminal_notice_type="Terminal_notice_type" />
     <div id="content">
         <Header :userInfoLabel="userInfoArr" :PageTitle="pageTitle" />
         <pull-to :top-load-method="refresh" v-if="!IsOpenOtherPage" :top-config="config" @top-state-change="stateChange" :is-bottom-bounce="false" :is-top-bounce="movepullTo">
@@ -29,6 +30,7 @@ import Footer from '@/components/footer';
 import PostBtn from '@/components/postBtn';
 import SideBar from '@/components/sideBar';
 import TerminalNotice from '@/components/terminalNotice';
+import EndRoll from '@/components/endRoll';
 import PullTo from 'vue-pull-to'
 import * as userInfo from "./assets/js/userInfo.js";
 import * as siteInfo from "./assets/js/siteInfo.js";
@@ -39,6 +41,8 @@ import * as User from "./assets/js/user.js";
 import * as UserPost from "./assets/js/userpost.js";
 import * as UserNotice from "./assets/js/usernotice.js";
 import * as fnc from "./assets/js/fnc.js";
+import * as EndRollInfo from "./assets/js/endRoll.js";
+
 
 export default {
     name: 'App',
@@ -48,12 +52,33 @@ export default {
         PostBtn,
         SideBar,
         PullTo,
-        TerminalNotice
+        TerminalNotice,
+        EndRoll
     },
     watch: {
         '$route'(toPage) {
             this.changePath(toPage);
+        },
+        ExistBurnPost() { //炎上投稿を消したか?
+            var self = this;
+            //炎上
+            if (this.IsTimeOut) {
+                setTimeout(function () {
+                    self.terminal_notice_set_fnc(message['mail']['3']['name'], message['mail']['3']['message'], 1);
+                }, 2 * 1000);
+            } else {
+                //炎上を防げた->end
+
+                setTimeout(function () {
+                    self.terminal_notice_set_fnc(message['line']['5']['name'], message['line']['5']['message'], 0);
+                    setTimeout(function () {
+                        self.endPatternStr = '親友が炎上・誹謗中傷';
+                        self.EndRaul = true;
+                    }, 8 * 1000);
+                }, 2 * 1000);
+            }
         }
+
     },
     data() {
         return {
@@ -73,9 +98,14 @@ export default {
             IsterminalNotice: false, //端末通知がきたか？
             Terminal_notice_name: '', //端末通知名
             Terminal_notice_message: '', //端末通知メッセージ
+            Terminal_notice_type: 0, //lime - 0 mail - 1
             notice_count: 0, //通知件数
             beforenoticelistLength: 0, //通知の配列length
             ExistBurnPost: true, //炎上投稿を削除したかどうか false->削除済み
+            IsTimeOut: false, //炎上投稿を消すタイミング次第でイベント変更
+            EndRaul: false,
+            endRollArr: [],
+            endPatternStr:'',
             config: {
                 pullText: '',
                 triggerText: '',
@@ -95,6 +125,7 @@ export default {
         this.user = User['user'];
         this.userpost = UserPost['userPost'];
         this.userNotice = UserNotice['userNotice'];
+        this.endRollArr = EndRollInfo['endRoll'];
     },
     mounted() {
         if (this.$route.path != '/') {
@@ -110,12 +141,7 @@ export default {
             //-------------------------
             //１、友人からTwitterでバズる画像を投稿してくれと催促される。
             //-------------------------
-            this.Terminal_notice_name = message['line']['0']['name'];
-            this.Terminal_notice_message = message['line']['0']['message'];
-            var self = this;
-            setTimeout(function () {
-                self.IsterminalNotice = true;
-            }, 2 * 1000);
+            this.terminal_notice_set_fnc(message['line']['0']['name'], message['line']['0']['message'], 0);
         },
         first_post_after() {
             //-------------------------
@@ -185,11 +211,11 @@ export default {
             var self = this;
             //-ユーザID（x++） 初期値
             var count_user_id = 20;
-
+            this.IsTimeOut = true;
             //炎上ループ
             var timerId = function (counter) {
                 //-ループの時間(ランダム)範囲設定
-                var loopTime = fnc.getRandomInt(300, 1000);
+                var loopTime = fnc.getRandomInt(100, 2000);
                 //-type(RTかGOODかREPLY)->ランダム
                 var randType = fnc.getRandomInt(0, 3);
                 var reply = "";
@@ -219,7 +245,7 @@ export default {
                 });
                 self.notice_count = (self.userNotice.length) - beforeNotice + self.notice_count;
                 self.InloopAction(counter);
-                if (counter < 130 && self.ExistBurnPost) {
+                if (counter < 205 && self.ExistBurnPost) {
                     setTimeout(function () {
                         counter++;
                         timerId(counter);
@@ -230,13 +256,29 @@ export default {
         },
         InloopAction(counter) {
             if (counter == 20) {
-                this.Terminal_notice_name = message['line']['1']['name'];
-                this.Terminal_notice_message = message['line']['1']['message'];
-                var self = this;
-                setTimeout(function () {
-                    self.IsterminalNotice = true;
-                }, 2 * 1000);
+                this.terminal_notice_set_fnc(message['line']['1']['name'], message['line']['1']['message'], 0);
+            } else if (counter == 30) {
+                this.terminal_notice_set_fnc(message['mail']['0']['name'], message['mail']['0']['message'], 1);
+            } else if (counter == 40) {
+                this.terminal_notice_set_fnc(message['mail']['1']['name'], message['mail']['1']['message'], 1);
+            } else if (counter == 50) {
+                this.terminal_notice_set_fnc(message['mail']['2']['name'], message['mail']['2']['message'], 1);
+            } else if (counter == 60) {
+                this.terminal_notice_set_fnc(message['line']['2']['name'], message['line']['2']['message'], 0);
+            } else if (counter == 70) {
+                this.terminal_notice_set_fnc(message['line']['3']['name'], message['line']['3']['message'], 0);
+            } else if (counter == 100) {
+                this.terminal_notice_set_fnc(message['line']['4']['name'], message['line']['4']['message'], 0);
             }
+        },
+        terminal_notice_set_fnc(name, msg, type) {
+            this.Terminal_notice_name = name;
+            this.Terminal_notice_message = msg;
+            this.Terminal_notice_type = type; //lime - 0 ma -1 
+            var self = this;
+            setTimeout(function () {
+                self.IsterminalNotice = true;
+            }, 2 * 1000);
         },
         handleScroll() {
             if (window.scrollY < 30) {

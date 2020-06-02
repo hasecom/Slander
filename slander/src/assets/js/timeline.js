@@ -87,7 +87,7 @@ export let timeline01 = [
         id:"7",
         name:'しんじ',
         type:0,//0は他人1は自分
-        message:'今日スロットで激アツ演出やった！！！最高すぎまじGODwwww',
+        message:'今日宝くじで激アツやった！！！最高すぎまじ神wwww',
         imagePath:"",
         iconPath:"",
         good:3,
