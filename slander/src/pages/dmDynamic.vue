@@ -7,13 +7,13 @@
             </router-link>
         </div>
         <div class="col-6 px-0 py-2 text-center font-weight-bold">
-            {{dmArr.user_name}}
+            {{OneParsondm.user_name}}
         </div>
         <div class="col-3 px-0"></div>
     </div>
     <div class="dm_body">
         <div class="msg">
-            <div v-for="(item,index) in dmArr.content" :key="index">
+            <div v-for="(item,index) in OneParsondm.content" :key="index">
                 <div v-if="item.type==0" class="text-right my-3">
                     <div class="px-0 my_msgWrap">
                         <div class="my_msg">{{item.message}}</div>
@@ -22,7 +22,7 @@
                 <div v-else class="text-left row mx-0 my-3">
                     <div class="col-2 px-0">
                         <div class="icon rounded-circle border my-2">
-                            <img v-if="dmArr.icon != ''" class="border rounded-circle" :src="imageLoad(dmArr.icon)" alt="">
+                            <img v-if="OneParsondm.icon != ''" class="border rounded-circle" :src="imageLoad(OneParsondm.icon)" alt="">
                         </div>
                     </div>
                     <div class="col-10 px-0 you_msgWrap">
@@ -54,7 +54,7 @@ export default {
             userDm: [],
             user: [],
             userDmDynamic: [],
-            dmArr: [],
+            OneParsondm: []
         }
     },
     mounted() {
@@ -67,6 +67,7 @@ export default {
             this.userDm = this.$parent.userDm;
             this.user = this.$parent.user;
             this.createdDmList();
+
         },
         createdDmList() {
             var tmpArr = innerJoin(this.user, this.userDm,
@@ -87,7 +88,7 @@ export default {
                     read,
                     message,
                 });
-            var tmpArr2 = innerJoin(tmpArr, this.userDmDynamic,
+            this.$parent.$parent.dmArr = innerJoin(tmpArr, this.userDmDynamic,
                 ({
                     user_name,
                     icon,
@@ -108,13 +109,24 @@ export default {
                     content
                 });
             var self = this;
-            this.dmArr = tmpArr2.filter(function (el) {
+            this.OneParsondm = this.$parent.$parent.dmArr.filter(function (el) {
                 return el.dm_id == self.dm_id;
             })[0];
+            //既読
+            this.$parent.dmArr.forEach(el => {
+                if (el.dm_id == self.dm_id) {
+                    el.read = 0;
+                }
+            });
         },
         inputFnc() {
             //親友タローのIDかつ一度もDMを送信していない場合
-            if (this.dmArr.fk_user_id == '3' && !this.$parent.sendDm) {
+            if (this.OneParsondm.fk_user_id == '3' &&
+                !this.$parent.sendDm &&
+                this.$parent.ExistBurnPost &&
+                !this.$parent.IsTimeOut &&
+                !this.$parent.IsEnd
+            ) {
                 $('.input').removeClass('text-muted');
                 return '自分たちがやったことは...';
             } else {
@@ -123,20 +135,17 @@ export default {
             }
         },
         sendDm() {
-            console.log(this.$parent.userStory.taroFirstDm)
-            console.log(this.$parent.userDmDynamic)
             //親友のタローのIDかつ一度もDMを送信していない場合
-            if (this.dmArr.fk_user_id == '3' && !this.$parent.sendDm) {
-                var self = this;
-                //親友タローのDMだけを取り出す
-                var aaa = this.$parent.userDmDynamic.filter(function (el) {
-                    return el.dynamic_dm_id == self.dm_id;
-                })[0];
-                console.log(aaa)
+            if (this.OneParsondm.fk_user_id == '3' &&
+                !this.$parent.sendDm &&
+                this.$parent.ExistBurnPost &&
+                !this.$parent.IsTimeOut &&
+                !this.$parent.IsEnd) {
                 //親友タローへのDM送信
-
+                this.OneParsondm.content.push(this.$parent.userStory.taroFirstDm)
                 //送信フラグをtrue(送信済みにする)
                 this.$parent.sendDm = true;
+                //Appのwatchへ
             }
         }
     }
@@ -180,17 +189,17 @@ export default {
 
 .you_msg {
     background: #dfe6e9;
-    display: inline;
     padding: 10px 10px;
     border-radius: 15px;
 }
 
 .my_msg {
     background: rgb(75, 156, 230);
-    display: inline;
     padding: 10px 10px;
     border-radius: 15px;
     color: white;
+    width: fit-content;
+    margin-left: auto;
 }
 
 .you_msgWrap {

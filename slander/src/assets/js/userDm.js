@@ -2,13 +2,13 @@ export let userDm = [
     {
         dm_id:0,//通知ID
         fk_user_id:2,//ユーザID
-        message:"おやすみ",
+        message:"",
         read:0 //0は既読 1は未読
     },
     {
         dm_id:1,//通知ID
         fk_user_id:1,//ユーザID
-        message:"あなた：いつも相談乗ってくれてありがとうね。",
+        message:"",
         read:0 //0は既読 1は未読
     },
     {

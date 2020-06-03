@@ -78,6 +78,21 @@ export default {
                     }, 8 * 1000);
                 }, 2 * 1000);
             }
+        },
+        sendDm() { //親友タローへのDM送信をしたらフラグ変更
+            //もしエンドをしていたらreturn
+            if (this.IsEnd) return;
+            var self = this;
+            //親友タローのDMだけを取り出す
+            var taroDm = self.dmArr.filter(function (el) {
+                return el.dm_id == self.userStory.taroDmId;
+            })[0];
+            setTimeout(function () {
+                //親友タローからのDM送信
+                taroDm.content.push(self.userStory.taroFirstDmRtn);
+                taroDm.read = "1";
+                self.dm_count = 1;
+            }, 3 * 1000);
         }
 
     },
@@ -90,7 +105,8 @@ export default {
             user: [], //自分以外のユーザ情報
             userpost: [], //ユーザの投稿
             userNotice: [], //ユーザの通知情報
-            userDm:[],//ユーザDMの通知情報
+            userDm: [], //ユーザDMの通知情報
+            dmArr: [], //ユーザDMとユーザと内容を混ぜたobj
             pageTitle: '',
             pageParam: '',
             beforePagePath: '/', //投稿画面用(戻ったときにさっきいたページ)
@@ -102,16 +118,16 @@ export default {
             Terminal_notice_message: '', //端末通知メッセージ
             Terminal_notice_type: 0, //lime - 0 mail - 1
             notice_count: 0, //通知件数
-            dm_count:0,//dmの通知件数
-            sendDm:false,//親友に最初のDMを送信したかどうか
+            dm_count: 0, //dmの通知件数
+            sendDm: false, //親友に最初のDMを送信したかどうか
             beforenoticelistLength: 0, //通知の配列length
             ExistBurnPost: true, //炎上投稿を削除したかどうか false->削除済み
-            IsTimeOut: false, //炎上投稿を消すタイミング次第でイベント変更->炎上済み
+            IsTimeOut: false, //炎上投稿を消すタイミング次第でイベント変更->true炎上済み
             EndRaul: false,
-            IsEnd: false, //エンドロール流れたか?
+            IsEnd: false, //エンドロール流れたか? true end後
             homeSwipeCnt: 0,
             endRollArr: [],
-            userDmDynamic:[],
+            userDmDynamic: [],
             endPatternStr: '',
             config: {
                 pullText: '',
@@ -309,10 +325,10 @@ export default {
             });
 
             this.otherPagePath.forEach(el => {
-                if (el == this.$route.path ) {
+                if (el == this.$route.path) {
                     this.IsOpenOtherPage = true;
-                }else if((this.$route.path).match(/\d/) != null){
-                    if(el + (this.$route.path).match(/\d/)[0] == this.$route.path){
+                } else if ((this.$route.path).match(/\d/) != null) {
+                    if (el + (this.$route.path).match(/\d/)[0] == this.$route.path) {
                         this.IsOpenOtherPage = true;
                     }
                 }
@@ -419,13 +435,16 @@ export default {
     width: 25px;
     height: 25px;
 }
-.vue-pull-to-wrapper{
-    background:white;
+
+.vue-pull-to-wrapper {
+    background: white;
 }
-#content{
-    background:rgba(231,235,239);
+
+#content {
+    background: rgba(231, 235, 239);
 }
-#main{
-    padding-bottom:30px;
+
+#main {
+    padding-bottom: 30px;
 }
 </style>

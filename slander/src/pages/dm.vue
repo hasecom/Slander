@@ -1,7 +1,7 @@
 <template>
 <div>
     <ul>
-        <router-link :to="'dm/'+item.dm_id" tag="li" v-for="(item,index) in dmArr" :key="index" class="row mg-0 border-bottom dm">
+        <router-link :to="'dm/'+ item.dm_id" tag="li" v-for="(item,index) in $parent.$parent.dmArr" :key="index" class="row mg-0 border-bottom dm" :style="Read(item.read)">
             <div class="col-3 px-0 left_item">
                 <div class="reply_icon rounded-circle border my-2">
                     <img v-if="item.icon != ''" class="border rounded-circle" :src="imageLoad(item.icon)" alt="">
@@ -24,7 +24,6 @@ import {
 export default {
     data() {
         return {
-            dmArr: [],
             userDm: [],
             user: [],
             userDmDynamic: [],
@@ -40,8 +39,9 @@ export default {
             this.userDmDynamic = this.$parent.$parent.userDmDynamic;
             this.userDm = this.$parent.$parent.userDm;
             this.user = this.$parent.$parent.user;
-
-            this.createdDmList();
+            if(!this.$parent.$parent.dmArr.length > 0){
+                this.createdDmList();
+            }
         },
         createdDmList() {
             var tmpArr = innerJoin(this.user, this.userDm,
@@ -62,7 +62,7 @@ export default {
                     read,
                     message,
                 });
-            this.dmArr = innerJoin(tmpArr, this.userDmDynamic,
+            this.$parent.$parent.dmArr = innerJoin(tmpArr, this.userDmDynamic,
                 ({
                     user_name,
                     icon,
@@ -86,6 +86,21 @@ export default {
         imageLoad(fileName) {
             return require('../assets/images/' + fileName + '.jpg');
         },
+    },
+    computed: {
+        Read: function () {
+            return function (read) {
+                if (read == 1) {
+                    return {
+                        'background': "rgb(237, 245, 253)"
+                    }
+                }else{
+                    return {
+                        'background':"white"
+                    }
+                }
+            }
+        }
     }
 }
 </script>

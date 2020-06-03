@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="supporter_list py-3">
-                <h5 class="font-weight-bold">サポーター様のご紹介</h5>
+                <h5 class="font-weight-bold">サポーター様のご紹介<span class="small">(順不同)</span></h5>
                 <div v-if="EndRollArr.supporter.length != 0" class="supporter py-2" v-for="(item,index) in EndRollArr.supporter" :key="index">
                     ・{{item.name}}様
                     <span v-if="item.type == 0">（ <a class="supporter_link" :href="'https://twitter.com/'+item.account_id" target="_blank">@{{item.account_id}}</a> )</span>
