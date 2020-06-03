@@ -8,7 +8,7 @@ export let userDmDynamic = [
             },
             {
                 'type':1, //ゼロが自分 1が相手
-                'message':'えめええ'
+                'message':'いいいい'
             },
         ]
     },
@@ -23,6 +23,10 @@ export let userDmDynamic = [
                 'type':1, //ゼロが自分 1が相手
                 'message':'えめえmafoえ'
             },
+            {
+                'type':0, //ゼロが自分 1が相手
+                'message':'ええええ'
+            },
         ]
     },
     {
@@ -30,11 +34,11 @@ export let userDmDynamic = [
         content:[
             {
                 'type':0, //ゼロが自分 1が相手
-                'message':'dada'
+                'message':'んー炎上しそうだしなあ・・・。'
             },
             {
                 'type':1, //ゼロが自分 1が相手
-                'message':'keek'
+                'message':'本に落書きした写真バズるから投稿よろｗ'
             },
         ]
     },
@@ -43,11 +47,11 @@ export let userDmDynamic = [
         content:[
             {
                 'type':0, //ゼロが自分 1が相手
-                'message':'あnananああ'
+                'message':'課題終わらん'
             },
             {
                 'type':1, //ゼロが自分 1が相手
-                'message':'mimim'
+                'message':'明日の課題やった？ｗ'
             },
         ]
     },

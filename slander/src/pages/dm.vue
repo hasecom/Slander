@@ -9,7 +9,8 @@
             </div>
             <div class="col-9 px-0">
                 <div class="font-weight-bold">{{item.user_name}}</div>
-                <div class="text-muted dm_msg">{{item.message}}</div>
+                <div v-if="item.content[item.content.length - 1].type == 0" class="text-muted dm_msg">あなた：{{item.content[item.content.length - 1].message}}</div>
+                <div v-else class="text-muted dm_msg">{{item.content[item.content.length - 1].message}}</div>
             </div>
         </router-link>
     </ul>
@@ -24,8 +25,9 @@ export default {
     data() {
         return {
             dmArr: [],
-            userPostArr: [],
+            userDm: [],
             user: [],
+            userDmDynamic: [],
         }
     },
     mounted() {
@@ -34,13 +36,15 @@ export default {
     methods: {
         _mounted() {
             this.$parent.$parent.dm_count = 0;
-            this.dmArr = this.$parent.$parent.userDm;
+            this.dm_id = this.$route.params.id;
+            this.userDmDynamic = this.$parent.$parent.userDmDynamic;
+            this.userDm = this.$parent.$parent.userDm;
             this.user = this.$parent.$parent.user;
 
             this.createdDmList();
         },
         createdDmList() {
-            var tmpArr = innerJoin(this.user, this.dmArr,
+            var tmpArr = innerJoin(this.user, this.userDm,
                 ({
                     user_id,
                     user_name,
@@ -58,7 +62,26 @@ export default {
                     read,
                     message,
                 });
-            this.dmArr = tmpArr;
+            this.dmArr = innerJoin(tmpArr, this.userDmDynamic,
+                ({
+                    user_name,
+                    icon,
+                    fk_user_id,
+                    dm_id,
+                    read,
+                    message,
+                }, {
+                    dynamic_dm_id,
+                    content
+                }) => dm_id === dynamic_dm_id && {
+                    user_name,
+                    icon,
+                    fk_user_id,
+                    dm_id,
+                    read,
+                    message,
+                    content
+                });
         },
         imageLoad(fileName) {
             return require('../assets/images/' + fileName + '.jpg');
@@ -78,7 +101,6 @@ export default {
     height: 100%;
     object-fit: cover;
 }
-
 
 .dm {
     padding: 5px 30px;

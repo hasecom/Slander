@@ -76,6 +76,11 @@ export let noticeAction2 = [
         type:0 //0:RT,1:GOOD,2:REPLY
     },
 ]
+//親友タローへのDM
+export let taroFirstDm = {
+    'type':0, //ゼロが自分 1が相手
+    'message':'自分たちがやったことは悪いことだって気づいた。本屋に謝りに行こうと思う。親友タローも一緒に行かない？'
+};
 
 //悪口リプ一覧(炎上ツイートに対して) 1-30
 export let abusive = [

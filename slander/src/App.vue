@@ -103,6 +103,7 @@ export default {
             Terminal_notice_type: 0, //lime - 0 mail - 1
             notice_count: 0, //通知件数
             dm_count:0,//dmの通知件数
+            sendDm:false,//親友に最初のDMを送信したかどうか
             beforenoticelistLength: 0, //通知の配列length
             ExistBurnPost: true, //炎上投稿を削除したかどうか false->削除済み
             IsTimeOut: false, //炎上投稿を消すタイミング次第でイベント変更->炎上済み
@@ -423,5 +424,8 @@ export default {
 }
 #content{
     background:rgba(231,235,239);
+}
+#main{
+    padding-bottom:30px;
 }
 </style>

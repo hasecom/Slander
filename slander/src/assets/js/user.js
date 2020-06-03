@@ -1110,7 +1110,7 @@ export let user = [
         icon:'',
     },    {
         user_id:223,
-        user_name:'Kakehi',
+        user_name:'くぴ',
         icon:'',
     },    {
         user_id:224,
