@@ -13,7 +13,7 @@ export let timeLineSwipePost = {
     type:0, //0は他人
     message: '投稿をする前に、他人を傷つける投稿じゃないか考えるのって大切だよね。',
     imagePath:'',
-    iconPath:'',
+    iconPath:'icon2',
     good: 0,
     repost: 0,
     replyCnt: 0,
@@ -25,7 +25,7 @@ export let timeLineSwipePostEd1 = {
     type:0, //0は他人
     message: 'うんこなう',
     imagePath:'',
-    iconPath:'',
+    iconPath:'icon2',
     good: 0,
     repost: 0,
     replyCnt: 0,

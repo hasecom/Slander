@@ -5,11 +5,11 @@ export let trendList = [
         content:[
             {
                 id:"0",
-                name:'aaa',
+                name:'たなか',
                 type:0,//0は他人1は自分
-                message:'最近坊主にしたよ',
+                message:'誹謗中傷はよくない',
                 imagePath:"",
-                iconPath:"",
+                iconPath:"icon80",
                 good:0,
                 repost:0,
                 replyCnt:0,
@@ -23,11 +23,11 @@ export let trendList = [
         content:[
             {
                 id:"0",
-                name:'aaa',
+                name:'えんこ',
                 type:0,//0は他人1は自分
-                message:'最近坊主にしたよ',
+                message:'炎上こわいよね',
                 imagePath:"",
-                iconPath:"",
+                iconPath:"icon30",
                 good:0,
                 repost:0,
                 replyCnt:0,
@@ -43,9 +43,9 @@ export let trendList = [
                 id:"0",
                 name:'ケイちゃん',
                 type:0,//0は他人1は自分
-                message:'ああ',
+                message:'けんかしてたｗ',
                 imagePath:"kenka",
-                iconPath:"",
+                iconPath:"icon12",
                 good:1000,
                 repost:8931,
                 replyCnt:341,
@@ -75,7 +75,7 @@ export let trendList = [
                 type:0,//0は他人1は自分
                 message:'引退しちゃうの・・・めっちゃ悲しい',
                 imagePath:"",
-                iconPath:"",
+                iconPath:"icon90",
                 good:1,
                 repost:0,
                 replyCnt:0,
@@ -87,7 +87,7 @@ export let trendList = [
                 type:0,//0は他人1は自分
                 message:'シンガーボーイ好きだったのに・・・ざんねん',
                 imagePath:"",
-                iconPath:"",
+                iconPath:"icon91",
                 good:0,
                 repost:0,
                 replyCnt:0,
@@ -99,7 +99,7 @@ export let trendList = [
                 type:0,//0は他人1は自分
                 message:'正直嫌いだったから嬉しい',
                 imagePath:"",
-                iconPath:"",
+                iconPath:"icon92",
                 good:0,
                 repost:10,
                 replyCnt:0,
@@ -111,7 +111,7 @@ export let trendList = [
                 type:0,//0は他人1は自分
                 message:'シンガーボーイって誰？ｗｗ引退なんてどうでもいい',
                 imagePath:"",
-                iconPath:"",
+                iconPath:"icon93",
                 good:2,
                 repost:11,
                 replyCnt:3,

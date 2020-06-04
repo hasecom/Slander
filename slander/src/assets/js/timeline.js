@@ -5,7 +5,7 @@ export let timeline01 = [
         type:0,//0は他人1は自分
         message:'最近坊主にしたよ',
         imagePath:"",
-        iconPath:"",
+        iconPath:"icon50",
         good:0,
         repost:0,
         replyCnt:0,
@@ -17,7 +17,7 @@ export let timeline01 = [
         type:0,//0は他人1は自分
         message:'頑張ってる人を応援したい！',
         imagePath:"",
-        iconPath:"",
+        iconPath:"icon2",
         good:2,
         repost:0,
         replyCnt:0,
@@ -29,7 +29,7 @@ export let timeline01 = [
         type:0,//0は他人1は自分
         message:'今日は疲れたー',
         imagePath:"",
-        iconPath:"",
+        iconPath:"icon53",
         good:1,
         repost:0,
         replyCnt:1,
@@ -41,7 +41,7 @@ export let timeline01 = [
         type:0,//0は他人1は自分
         message:'楽しいな',
         imagePath:"",
-        iconPath:"",
+        iconPath:"icon54",
         good:0,
         repost:0,
         replyCnt:0,
@@ -53,7 +53,7 @@ export let timeline01 = [
         type:0,//0は他人1は自分
         message:'今日は仕事だ',
         imagePath:"",
-        iconPath:"",
+        iconPath:"icon55",
         good:2,
         repost:0,
         replyCnt:1,
@@ -65,7 +65,7 @@ export let timeline01 = [
         type:0,//0は他人1は自分
         message:'なにこれｗｗｗ',
         imagePath:"",
-        iconPath:"",
+        iconPath:"icon56",
         good:2,
         repost:1,
         replyCnt:0,
@@ -77,7 +77,7 @@ export let timeline01 = [
         type:0,//0は他人1は自分
         message:'最近嫌なことばっかで本当にネガティブになる・・・本当に嫌だな。辛いな帰りたいな',
         imagePath:"",
-        iconPath:"",
+        iconPath:"icon57",
         good:12,
         repost:0,
         replyCnt:7,
@@ -89,7 +89,7 @@ export let timeline01 = [
         type:0,//0は他人1は自分
         message:'今日宝くじで激アツやった！！！最高すぎまじ神wwww',
         imagePath:"",
-        iconPath:"",
+        iconPath:"icon58",
         good:3,
         repost:0,
         replyCnt:0,
@@ -101,7 +101,7 @@ export let timeline01 = [
         type:0,//0は他人1は自分
         message:'かなしいな。うまくいかないけどがんばろう。わたし頑張る',
         imagePath:"",
-        iconPath:"",
+        iconPath:"icon59",
         good:13,
         repost:1,
         replyCnt:3,
