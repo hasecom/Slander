@@ -50,9 +50,6 @@ export default {
         }
     },
     methods: {
-        imageLoad(fileName) {
-            return require('../assets/images/' + fileName + '.jpg');
-        },
         post() {
             //投稿ボタンを押したら
             this.$router.push('/')
@@ -63,13 +60,13 @@ export default {
                 this.$parent.timeLine.push({
                     id: this.$parent.userStory.BurnId,
                     name: this.userInfoArr['name'],
-                    type:1,
+                    type: 1,
                     message: postFirstAction.message,
                     imagePath: postFirstAction.imagePath,
                     iconPath: this.userInfoArr['icon'],
                     good: 0,
                     repost: 0,
-                    replyCnt:0,
+                    replyCnt: 0,
                     timestamp: ""
                 });
                 this.$parent.userpost.push({
@@ -80,13 +77,20 @@ export default {
                     iconPath: this.userInfoArr['icon'],
                     good: 0,
                     repost: 0,
-                    replyCnt:0,
+                    replyCnt: 0,
                     timestamp: ""
                 })
                 this.$parent.userStory.firstPostFnc();
                 this.$parent.first_post_after();
             }
         }
+    },
+    computed: {
+        imageLoad:function() {
+            return function(fileName){
+                return require('../assets/images/' + fileName + '.jpg');
+            }
+        },
     }
 }
 </script>

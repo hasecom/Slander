@@ -96,9 +96,6 @@ export default {
             })[0];
             this.replyText = this.$parent.$parent.userStory.singerBoyReply
         },
-        imageLoad(fileName) {
-            return require('../assets/images/' + fileName + '.jpg');
-        },
         reply(id) {
             this.Postreplay = true;
             //シンガーボーイのトレンド
@@ -110,6 +107,13 @@ export default {
         post(){
             this.$parent.$parent.IsReplySingerBoy = true;
         }
+    },
+    computed: {
+        imageLoad:function() {
+            return function(fileName){
+                return require('../assets/images/' + fileName + '.jpg');
+            }
+        },
     }
 }
 </script>

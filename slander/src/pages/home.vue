@@ -83,9 +83,6 @@ export default {
         updateTimeLine() {
             this.timeline = (this.$parent.$parent.timeLine).slice().reverse();
         },
-        imageLoad(fileName) {
-            return require('../assets/images/' + fileName + '.jpg');
-        },
         home_detail(item) {
             $('body').css('overflow', 'hidden');
             $('body').css('position', 'fixed');
@@ -114,6 +111,13 @@ export default {
             this.$parent.$parent.timeLine.splice(this.timeline.length - deleteNum, 1);
             this.detailsClose();
         }
+    },
+    computed: {
+        imageLoad:function() {
+            return function(fileName){
+                return require('../assets/images/' + fileName + '.jpg');
+            }
+        },
     }
 }
 </script>

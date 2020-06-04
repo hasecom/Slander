@@ -120,14 +120,6 @@ export default {
             }
         }
     },
-    mounted() {
-
-    },
-    methods: {
-        imageLoad(fileName) {
-            return require('../assets/images/' + fileName + '.jpg');
-        },
-    },
     computed: {
         iconColor: function () {
             return function (type) {
@@ -142,6 +134,11 @@ export default {
                 };
             }
         },
+        imageLoad: function () {
+            return function (fileName) {
+                return require('../assets/images/' + fileName + '.jpg');
+            }
+        }
     }
 }
 </script>
@@ -182,8 +179,8 @@ export default {
 .notice_label {
     font-size: 20px;
 }
-.reply_text{
-    color:#00acee;
-}
 
+.reply_text {
+    color: #00acee;
+}
 </style>

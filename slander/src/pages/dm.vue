@@ -83,9 +83,6 @@ export default {
                     content
                 });
         },
-        imageLoad(fileName) {
-            return require('../assets/images/' + fileName + '.jpg');
-        },
     },
     computed: {
         Read: function () {
@@ -100,7 +97,12 @@ export default {
                     }
                 }
             }
-        }
+        },
+        imageLoad:function() {
+            return function(fileName){
+                return require('../assets/images/' + fileName + '.jpg');
+            }
+    }
     }
 }
 </script>

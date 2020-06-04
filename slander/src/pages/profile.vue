@@ -105,13 +105,17 @@ export default {
             this.userInfoArr = this.$parent.userInfoArr;
             this.userPost = this.$parent.userpost;
         },
-        imageLoad(fileName) {
-            return require('../assets/images/' + fileName + '.jpg');
-        },
         changeProfile(){
             this.$parent.userInfoArr.profile = this.$parent.userStory.ChangeUserProfile;
             this.$parent.changeProfileEnd();
         }
+    },
+    computed: {
+        imageLoad:function() {
+            return function(fileName){
+                return require('../assets/images/' + fileName + '.jpg');
+            }
+        },
     }
 }
 </script>

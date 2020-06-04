@@ -148,6 +148,13 @@ export default {
                 //Appのwatchへ
             }
         }
+    },
+    computed: {
+        imageLoad: function () {
+            return function (fileName) {
+                return require('../assets/images/' + fileName + '.jpg');
+            }
+        },
     }
 }
 </script>

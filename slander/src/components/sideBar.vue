@@ -54,6 +54,7 @@
     </div>
 </div>
 </template>
+
 <script>
 import $ from 'jquery';
 export default {
@@ -62,48 +63,52 @@ export default {
             type: Object
         }
     },
-    data(){
-        return{
-            iconPath:''
+    data() {
+        return {
+            iconPath: ''
         }
     },
     mounted() {
         this.iconPath = this.imageLoad(this.userInfoLabel['icon']);
-        if(this.$parent.IsOpensideBar){
+        if (this.$parent.IsOpensideBar) {
             this.openAnimationSideMenu();
         }
     },
     methods: {
-        imageLoad(fileName) {
-            return require('../assets/images/' + fileName + '.jpg');
-        },
-        openAnimationSideMenu(){
+        openAnimationSideMenu() {
             $('#sideBar').animate({
-                'opacity':'1'
+                'opacity': '1'
             });
             $('.openMenu').animate({
-                "left":"0"
+                "left": "0"
             });
         },
-        closeAnimationSideMenu(){
+        closeAnimationSideMenu() {
             var self = this;
             $('#sideBar').animate({
-                'opacity':'0.5'
+                'opacity': '0.5'
             });
             $('.openMenu').animate({
-                "left":"-100%"
-            },function(){
+                "left": "-100%"
+            }, function () {
                 self.$parent.IsOpensideBar = false;
             });
         },
-        openProfile(){
+        openProfile() {
             this.closeAnimationSideMenu()
             this.$router.push('profile')
         },
-        logout(){
+        logout() {
             this.closeAnimationSideMenu()
             this.$router.push('logout')
         }
+    },
+    computed: {
+        imageLoad: function () {
+            return function (fileName) {
+                return require('../assets/images/' + fileName + '.jpg');
+            }
+        },
     }
 }
 </script>
@@ -118,20 +123,20 @@ export default {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
-    opacity:0.5;
+    opacity: 0.5;
     z-index: 20;
 }
 
-.header-icon-wrapper > img{
-    width:37px;
-    height:37px;
+.header-icon-wrapper>img {
+    width: 37px;
+    height: 37px;
     object-fit: cover;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 0px 2px inset;
 }
 
 .openMenu {
-    position:absolute;
-    left:-100%;
+    position: absolute;
+    left: -100%;
     background: white;
     width: 75%;
     height: 100%;
@@ -146,14 +151,17 @@ export default {
 .MenuMain {
     padding: 5px 10px;
 }
-.MenuName{
-    font-size:15px;
+
+.MenuName {
+    font-size: 15px;
 }
-.font-awesome-icon-element{
-    color:#00acee;
+
+.font-awesome-icon-element {
+    color: #00acee;
     text-align: right;
 }
-.sideMenuContent >div{
-    padding:10px 10px;
+
+.sideMenuContent>div {
+    padding: 10px 10px;
 }
 </style>
