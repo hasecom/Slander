@@ -34,7 +34,7 @@
                         </div>
                         <div class="row text-muted text-center pt-3">
                             <div class="col-3 px-0">
-                                <font-awesome-icon icon="comment" @click="reply()" />
+                                <font-awesome-icon icon="comment" @click="reply(item.id)" />
                                 <span class="px-1 small" v-show="item.replyCnt > 0">{{item.replyCnt}}</span>
                             </div>
                             <div class="col-3 px-0">
@@ -99,10 +99,10 @@ export default {
         imageLoad(fileName) {
             return require('../assets/images/' + fileName + '.jpg');
         },
-        reply() {
+        reply(id) {
             this.Postreplay = true;
             //シンガーボーイのトレンド
-            if (this.trend_id == this.$parent.$parent.userStory.singerBoyTrendId) {
+            if (this.trend_id == this.$parent.$parent.userStory.singerBoyTrendId && id== 0) {
                 this.IssingerBoy = true;
             }
 

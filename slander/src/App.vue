@@ -286,7 +286,7 @@ export default {
             //炎上ループ
             var timerId = function (counter) {
                 //-ループの時間(ランダム)範囲設定
-                var loopTime = fnc.getRandomInt(100, 2000);
+                var loopTime = fnc.getRandomInt(100, 1300);
                 //-type(RTかGOODかREPLY)->ランダム
                 var randType = fnc.getRandomInt(0, 3);
                 var reply = "";

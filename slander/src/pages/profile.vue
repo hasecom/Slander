@@ -45,7 +45,7 @@
         <div class="border-top">
             <div id="timeline" v-for="(item,index) in userPost.slice().reverse()" :key="index">
                 <div class="border-bottom">
-                    <div class="row  mg-0 post">
+                    <div class="row  mx-0 post">
                         <div class="col-2 px-0">
                             <div class="icon rounded-circle border">
                                 <img v-if="userInfoArr.icon != undefined" :src="imageLoad(userInfoArr.icon)" alt="" class="rounded-circle border">
@@ -138,7 +138,7 @@ export default {
 .home_img {
     width: 100%;
     height: 100px;
-    background: #2d3436;
+    background: #636e72;
 }
 
 .icon {
