@@ -12,17 +12,15 @@
                     <font-awesome-icon icon="chevron-right" />
                 </span>
             </div>
-            <div class="text-right">製作者：{{EndRollArr.producer}}</div>
+            <div class="text-right">製作者：{{EndRollArr.producer}} ( <a class="supporter_link" :href="'https://twitter.com/'+EndRollArr.producer_twitter_id" target="_blank">@{{EndRollArr.producer_twitter_id}}</a> ) </div>
             <div class="py-3">{{EndRollArr.description}}</div>
             <div class="twitter_share text-center my-3">
                 <div>
                     多くのネットユーザに届きますように<br>シェアのご協力お願いいたします。
                 </div>
-                <div class="twitter btn border shadow-sm mt-3">
+                <div class="twitter btn border shadow-sm mt-3" @click="twitterShare">
                     <font-awesome-icon :icon="['fab', 'twitter']" />
-                    <a href="//twitter.com/share" class="twitter-share-button text-white" data-text="<!-- ここにTweetしたときにデフォルトでいれておきたい文字列を入れる -->" data-url="<!-- ここにTweetしたときに入れたいURLを入れる -->" data-lang="ja<!-- 日本語の場合 -->">
-                        ツイート
-                    </a>
+                    ツイート
                 </div>
             </div>
             <div class="supporter_list py-3">
@@ -61,7 +59,7 @@ export default {
             type: Object
         },
         EndPattern: {
-            type:String
+            type: String
         }
     },
     data() {
@@ -79,6 +77,12 @@ export default {
             $('body').css('overflow', 'auto');
             $('body').css('position', 'static');
             this.$parent.EndRaul = false;
+        },
+        twitterShare() {
+            //シェアする画面を設定
+            var shareURL = 'https://twitter.com/intent/tweet?text=【' + this.EndPattern+"エンド】"+"%0A%23炎上・誹謗中傷擬似体験%0A" + '&url=' + "http://hase.com";
+            //シェア用の画面へ移行
+            window.open(shareURL, "_blank");
         }
     }
 }
@@ -142,7 +146,8 @@ export default {
     background: #b2bec3;
     color: white;
 }
-.kasen{
+
+.kasen {
     text-decoration: underline;
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
 <div id="app">
+    <FirstView v-if="isFirstView" />
     <EndRoll v-if="EndRaul" :EndRollArr="endRollArr" :EndPattern="endPatternStr" />
     <TerminalNotice v-if="IsterminalNotice" :terminal_notice_name="Terminal_notice_name" :terminal_notice_message="Terminal_notice_message" :terminal_notice_type="Terminal_notice_type" />
     <div id="content">
@@ -31,6 +32,7 @@ import PostBtn from '@/components/postBtn';
 import SideBar from '@/components/sideBar';
 import TerminalNotice from '@/components/terminalNotice';
 import EndRoll from '@/components/endRoll';
+import FirstView from '@/components/firstView';
 import PullTo from 'vue-pull-to'
 import * as userInfo from "./assets/js/userInfo.js";
 import * as siteInfo from "./assets/js/siteInfo.js";
@@ -55,7 +57,8 @@ export default {
         SideBar,
         PullTo,
         TerminalNotice,
-        EndRoll
+        EndRoll,
+        FirstView
     },
     watch: {
         '$route'(toPage) {
@@ -130,6 +133,9 @@ export default {
                 self.EndRaul = true;
                 self.IsEnd = true;
             }, 3 * 1000);
+        },
+        isFirstView() {
+            this._mounted();
         }
 
     },
@@ -165,6 +171,7 @@ export default {
             IsEnd: false, //エンドロール流れたか? true->end後
             IsReplySingerBoy: false, //シンガーボーイへリプを送ったか?
             IsCalled: false, //電話はかかってきたか？かかってきたらtrue
+            isFirstView: true, //firstview中ならば
             homeSwipeCnt: 0,
             endRollArr: [],
             userDmDynamic: [],
@@ -198,19 +205,22 @@ export default {
         this.trendList = TrendList['trendList']
     },
     mounted() {
-        if (this.$route.path != '/') {
-            this.$router.push('/')
-        }
-        this.changePath(this.beforePagePath);
-        window.addEventListener('scroll', this.handleScroll);
-        this.story();
+        
     },
     methods: {
+        _mounted() {
+            if (this.$route.path != '/') {
+                this.$router.push('/')
+            }
+            this.changePath(this.beforePagePath);
+            window.addEventListener('scroll', this.handleScroll);
+            this.story();
+        },
         story() {
             //-------------------------
             //１、友人からTwitterでバズる画像を投稿してくれと催促される。
             //-------------------------
-            this.terminal_notice_set_fnc(message['line']['0']['name'], message['line']['0']['message'], 0);
+            this.terminal_notice_set_fnc(message['line']['0']['name'],'おい、'+this.userInfoArr.name+'。'+message['line']['0']['message'], 0);
         },
         first_post_after() {
             //-------------------------
