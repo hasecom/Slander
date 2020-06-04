@@ -44,6 +44,7 @@ import * as UserDm from "./assets/js/userDm.js";
 import * as UserDmDynamic from "./assets/js/userDmDynamic.js";
 import * as fnc from "./assets/js/fnc.js";
 import * as EndRollInfo from "./assets/js/endRoll.js";
+import * as TrendList from "./assets/js/trendList.js";
 
 export default {
     name: 'App',
@@ -89,9 +90,31 @@ export default {
             })[0];
             setTimeout(function () {
                 //親友タローからのDM送信
-                taroDm.content.push(self.userStory.taroFirstDmRtn);
+                //3分の一で更生
+                var endPatternStr = '自分と親友更生';
+                if(fnc.getRandomInt(0,3) == 0){
+                    taroDm.content.push(self.userStory.taroFirstDmRtn);
+                }else{
+                    endPatternStr = '親友タローとの関係を断ち切ろう'
+                    taroDm.content.push(self.userStory.taroFirstDmRtn2);
+                }
                 taroDm.read = "1";
                 self.dm_count = 1;
+                setTimeout(function () {
+                    self.endPatternStr = endPatternStr;
+                    self.EndRaul = true;
+                    self.IsEnd = true;
+                }, 5 * 1000);
+            }, 3 * 1000);
+        },
+        IsReplySingerBoy() {
+            //もしエンドをしていたらreturn
+            if (this.IsEnd) return;
+            var self = this;
+            setTimeout(function () {
+                self.endPatternStr = '他人を傷つける';
+                self.EndRaul = true;
+                self.IsEnd = true;
             }, 3 * 1000);
         }
 
@@ -107,6 +130,7 @@ export default {
             userNotice: [], //ユーザの通知情報
             userDm: [], //ユーザDMの通知情報
             dmArr: [], //ユーザDMとユーザと内容を混ぜたobj
+            trendList: [], //トレンドリスト
             pageTitle: '',
             pageParam: '',
             beforePagePath: '/', //投稿画面用(戻ったときにさっきいたページ)
@@ -124,7 +148,8 @@ export default {
             ExistBurnPost: true, //炎上投稿を削除したかどうか false->削除済み
             IsTimeOut: false, //炎上投稿を消すタイミング次第でイベント変更->true炎上済み
             EndRaul: false,
-            IsEnd: false, //エンドロール流れたか? true end後
+            IsEnd: false, //エンドロール流れたか? true->end後
+            IsReplySingerBoy: false, //シンガーボーイへリプを送ったか?
             homeSwipeCnt: 0,
             endRollArr: [],
             userDmDynamic: [],
@@ -152,6 +177,7 @@ export default {
         this.userDm = UserDm['userDm'];
         this.endRollArr = EndRollInfo['endRoll'];
         this.userDmDynamic = UserDmDynamic['userDmDynamic'];
+        this.trendList = TrendList['trendList']
     },
     mounted() {
         if (this.$route.path != '/') {

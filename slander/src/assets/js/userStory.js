@@ -93,6 +93,10 @@ export let taroFirstDmRtn2 = {
     'message':'なに言ってんの？今更ふざけんなよ。'
 };
 
+//シンガーボーイへの誹謗中傷
+export let singerBoyTrendId = '3';
+export let singerBoyReply = 'お前がいなくなればみんな幸せ。嬉しすぎる。本当にありがとう。今後一生メディアに映らないでくれよｗﾀﾋ'
+
 //悪口リプ一覧(炎上ツイートに対して) 1-30
 export let abusive = [
     '気持悪・・・',

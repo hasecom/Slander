@@ -9,7 +9,7 @@ export let timeline01 = [
         good:0,
         repost:0,
         replyCnt:0,
-        timestamp:"5時間前"
+        timestamp:""
     },
     {
         id:"1",
@@ -21,7 +21,7 @@ export let timeline01 = [
         good:2,
         repost:0,
         replyCnt:0,
-        timestamp:"5時間前"
+        timestamp:""
     },
     {
         id:"2",
@@ -33,7 +33,7 @@ export let timeline01 = [
         good:1,
         repost:0,
         replyCnt:1,
-        timestamp:"5時間前"
+        timestamp:""
     },
     {
         id:"3",
@@ -45,7 +45,7 @@ export let timeline01 = [
         good:0,
         repost:0,
         replyCnt:0,
-        timestamp:"8時間前"
+        timestamp:""
     },
     {
         id:"4",
@@ -57,7 +57,7 @@ export let timeline01 = [
         good:2,
         repost:0,
         replyCnt:1,
-        timestamp:"8時間前"
+        timestamp:""
     },
     {
         id:"5",
@@ -69,7 +69,7 @@ export let timeline01 = [
         good:2,
         repost:1,
         replyCnt:0,
-        timestamp:"8時間前"
+        timestamp:""
     },
     {
         id:"6",
@@ -81,7 +81,7 @@ export let timeline01 = [
         good:12,
         repost:0,
         replyCnt:7,
-        timestamp:"8時間前"
+        timestamp:""
     },
     {
         id:"7",
@@ -93,11 +93,11 @@ export let timeline01 = [
         good:3,
         repost:0,
         replyCnt:0,
-        timestamp:"8時間前"
+        timestamp:""
     },
     {
         id:"8",
-        name:'がんばるちゃん',
+        name:'がんばちゃん',
         type:0,//0は他人1は自分
         message:'かなしいな。うまくいかないけどがんばろう。わたし頑張る',
         imagePath:"",
@@ -105,6 +105,6 @@ export let timeline01 = [
         good:13,
         repost:1,
         replyCnt:3,
-        timestamp:"9時間前"
+        timestamp:""
     },
 ]

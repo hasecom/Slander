@@ -14,7 +14,7 @@
     <div class="dm_body">
         <div class="msg">
             <div v-for="(item,index) in OneParsondm.content" :key="index">
-                <div v-if="item.type==0" class="text-right my-3">
+                <div v-if="item.type==0" class="my-3">
                     <div class="px-0 my_msgWrap">
                         <div class="my_msg">{{item.message}}</div>
                     </div>

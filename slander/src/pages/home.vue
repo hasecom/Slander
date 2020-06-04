@@ -8,7 +8,7 @@
                         <img v-if="item['imagePath']" class="border rounded-circle" :src="item['iconPath'] != '' ? imageLoad(item['iconPath']) : ''" alt="">
                     </div>
                 </div>
-                <div class="col-10 px-0">
+                <div class="col-10  pl-3 pr-0">
                     <div class="row">
                         <div class="col-6">
                             <div class="font-weight-bold home_name">

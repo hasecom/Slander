@@ -90,7 +90,7 @@ export default {
     background: rgba(0, 0, 0, 0.9);
     width: 100%;
     height: 100%;
-    z-index: 40;
+    z-index: 100;
     overflow-y: scroll;
 }
 

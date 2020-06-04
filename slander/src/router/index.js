@@ -4,6 +4,7 @@ import Search from '@/pages/search'
 import Dm from '@/pages/dm'
 import DmDynamic from '@/pages/dmDynamic'
 import Post from '@/pages/post'
+import TrendPage from '@/pages/trendPage'
 
 
 export default [
@@ -18,6 +19,10 @@ export default [
     {
       path: '/search',
       component: Search
+    },
+    {
+      path: '/trend/:id',
+      component: TrendPage
     },
     {
       path: '/dm',

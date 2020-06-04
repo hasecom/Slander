@@ -127,6 +127,7 @@ export default {
 }
 
 ul {
-    padding: 0px;
+    padding:0px;
 }
+
 </style>
