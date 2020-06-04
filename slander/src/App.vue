@@ -67,13 +67,18 @@ export default {
             if (this.IsTimeOut) {
                 setTimeout(function () {
                     self.terminal_notice_set_fnc(message['mail']['3']['name'], message['mail']['3']['message'], 1);
+                    setTimeout(function () {
+                        self.endPatternStr = "自爆";
+                        self.EndRaul = true;
+                        self.IsEnd = true;
+                    }, 4 * 1000);
                 }, 2 * 1000);
             } else {
                 //炎上を防げた->end
                 setTimeout(function () {
                     self.terminal_notice_set_fnc(message['line']['5']['name'], message['line']['5']['message'], 0);
                     setTimeout(function () {
-                        self.endPatternStr = '親友が炎上・誹謗中傷';
+                        self.endPatternStr = '親友タローが炎上・誹謗中傷';
                         self.EndRaul = true;
                         self.IsEnd = true;
                     }, 8 * 1000);
@@ -91,10 +96,10 @@ export default {
             setTimeout(function () {
                 //親友タローからのDM送信
                 //3分の一で更生
-                var endPatternStr = '自分と親友更生';
-                if(fnc.getRandomInt(0,3) == 0){
+                var endPatternStr = '自分と親友タロー更生';
+                if (fnc.getRandomInt(0, 3) == 0) {
                     taroDm.content.push(self.userStory.taroFirstDmRtn);
-                }else{
+                } else {
                     endPatternStr = '親友タローとの関係を断ち切ろう'
                     taroDm.content.push(self.userStory.taroFirstDmRtn2);
                 }
@@ -113,6 +118,15 @@ export default {
             var self = this;
             setTimeout(function () {
                 self.endPatternStr = '他人を傷つける';
+                self.EndRaul = true;
+                self.IsEnd = true;
+            }, 3 * 1000);
+        },
+        IsCalled() {
+            if (this.IsEnd) return;
+            var self = this;
+            setTimeout(function () {
+                self.endPatternStr = '炎上・誹謗中傷';
                 self.EndRaul = true;
                 self.IsEnd = true;
             }, 3 * 1000);
@@ -150,6 +164,7 @@ export default {
             EndRaul: false,
             IsEnd: false, //エンドロール流れたか? true->end後
             IsReplySingerBoy: false, //シンガーボーイへリプを送ったか?
+            IsCalled: false, //電話はかかってきたか？かかってきたらtrue
             homeSwipeCnt: 0,
             endRollArr: [],
             userDmDynamic: [],
@@ -162,7 +177,8 @@ export default {
             },
             otherPagePath: [
                 '/post',
-                '/dm/'
+                '/dm/',
+                '/call'
             ]
         }
     },
@@ -322,6 +338,8 @@ export default {
                 this.terminal_notice_set_fnc(message['line']['3']['name'], message['line']['3']['message'], 0);
             } else if (counter == 100) {
                 this.terminal_notice_set_fnc(message['line']['4']['name'], message['line']['4']['message'], 0);
+            } else if (counter == 200) {
+                this.$router.push('call')
             }
         },
         terminal_notice_set_fnc(name, msg, type) {

@@ -5,6 +5,7 @@ import Dm from '@/pages/dm'
 import DmDynamic from '@/pages/dmDynamic'
 import Post from '@/pages/post'
 import TrendPage from '@/pages/trendPage'
+import Call from '@/pages/call'
 
 
 export default [
@@ -35,5 +36,9 @@ export default [
     {
       path: '/post',
       component: Post
+    },
+    {
+      path: '/call',
+      component:Call
     }
 ]
