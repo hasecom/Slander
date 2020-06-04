@@ -176,6 +176,7 @@ export default {
             endRollArr: [],
             userDmDynamic: [],
             endPatternStr: '',
+            isPhone: true, //スマホかpcか
             config: {
                 pullText: '',
                 triggerText: '',
@@ -205,7 +206,11 @@ export default {
         this.trendList = TrendList['trendList']
     },
     mounted() {
-        
+        //768px以上ならば
+        if (768 <= $(window).width()) {
+            this.isPhone = false;
+            alert('このサイトは、スマホ専用です。PCは対応しておりません。')
+        }
     },
     methods: {
         _mounted() {
@@ -220,7 +225,7 @@ export default {
             //-------------------------
             //１、友人からTwitterでバズる画像を投稿してくれと催促される。
             //-------------------------
-            this.terminal_notice_set_fnc(message['line']['0']['name'],'おい、'+this.userInfoArr.name+'。'+message['line']['0']['message'], 0);
+            this.terminal_notice_set_fnc(message['line']['0']['name'], 'おい、' + this.userInfoArr.name + '。' + message['line']['0']['message'], 0);
         },
         first_post_after() {
             //-------------------------
@@ -511,5 +516,27 @@ export default {
 
 #main {
     padding-bottom: 30px;
+}
+@media screen and (min-width:600px) { 
+    #firstView,#content, .fixed-bottom,#terminalNoitce,#post,.dmdynamic,#sideBar,#profile,#logout,.endrollWrapper{
+        width:500px !important;
+        margin:0 auto;
+    }
+    #firstView{
+        left:0;
+        right:0;
+    }
+    body{
+        width: 100%;
+        height:300px;
+    }
+    .fixed-button-wrapper{
+        right:30%;
+    }
+    #app{
+        background:#2d3436;
+    }
+
+
 }
 </style>

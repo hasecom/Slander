@@ -80,7 +80,7 @@ export default {
         },
         twitterShare() {
             //シェアする画面を設定
-            var shareURL = 'https://twitter.com/intent/tweet?text=【' + this.EndPattern+"エンド】"+"%0A%23炎上・誹謗中傷擬似体験%0A" + '&url=' + "https://slander-app.herokuapp.com/";
+            var shareURL = 'https://twitter.com/intent/tweet?text=【' + this.EndPattern+"エンド】"+"%0A%23炎上・誹謗中傷擬似体験%0A" + '&url=' + "https://slander-app.herokuapp.com/#/";
             //シェア用の画面へ移行
             window.open(shareURL, "_blank");
         }
