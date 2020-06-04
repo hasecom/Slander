@@ -50,5 +50,10 @@ export let mail = [
         param:'3',
         name:'無駄',
         message:'逃げても無駄だよ。消すなks'
+    },
+    {
+        param:'4',
+        name:'君の恋人候補♡',
+        message:'君のことが好きだ！今から会いに行くね♡待ってて♡'
     }
 ]

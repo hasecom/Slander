@@ -6,6 +6,8 @@ import DmDynamic from '@/pages/dmDynamic'
 import Post from '@/pages/post'
 import TrendPage from '@/pages/trendPage'
 import Call from '@/pages/call'
+import Profile from '@/pages/profile'
+import Logout from '@/pages/logout'
 
 
 export default [
@@ -40,5 +42,14 @@ export default [
     {
       path: '/call',
       component:Call
-    }
+    },
+    {
+      path: '/profile',
+      component:Profile
+    },
+    {
+      path: '/logout',
+      component:Logout
+    },
+
 ]

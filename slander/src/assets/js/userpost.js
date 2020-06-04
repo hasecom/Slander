@@ -4,7 +4,7 @@ export let userPost = [
         message:'みんなおやすみ！',
         imagePath:"",
         good:0,
-        repost:0,
+        repost:3,
         replyCnt:0,
         timestamp:"5時間前"
     },
@@ -12,8 +12,8 @@ export let userPost = [
         user_post_id:1,
         message:'あしたバズる投稿するねｗお楽しみにw',
         imagePath:"",
-        good:0,
-        repost:0,
+        good:2,
+        repost:1,
         replyCnt:0,
         timestamp:"1日前"
     },
@@ -23,7 +23,7 @@ export let userPost = [
         imagePath:"",
         good:0,
         repost:0,
-        replyCnt:0,
+        replyCnt:1,
         timestamp:"4時間前"
     }
 ]

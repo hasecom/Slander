@@ -4,6 +4,8 @@ export let start = false;
 export let firstPost = false;
 //炎上投稿ID
 export let BurnId = 'qwerty';
+
+export const ChangeUserProfile = 'みんな仲良くしてください。'
 //スワイプ連続時ユーザ投稿
 export let timeLineSwipePost = {
     id: '',

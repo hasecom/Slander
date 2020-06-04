@@ -178,7 +178,9 @@ export default {
             otherPagePath: [
                 '/post',
                 '/dm/',
-                '/call'
+                '/call',
+                '/profile',
+                '/logout'
             ]
         }
     },
@@ -392,6 +394,15 @@ export default {
                 $('.default-text').removeClass('_pull');
                 $('.default-text').removeClass('_trigger');
             }
+        },
+        changeProfileEnd() {
+            if (this.IsEnd) return;
+            var self = this;
+            setTimeout(function () {
+                self.endPatternStr = 'ネットリテラシーが高い';
+                self.EndRaul = true;
+                self.IsEnd = true;
+            }, 3 * 1000);
         },
         refresh(loaded) {
             loaded('done');

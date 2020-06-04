@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="MenuMain">
-            <div class="header-icon-wrapper">
+            <div class="header-icon-wrapper" @click="openProfile">
                 <img :src="iconPath" alt="" class="rounded-circle border">
             </div>
             <div class="MenuName">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="sideMenuContent border-bottom">
-                <div>
+                <div @click="openProfile">
                     <font-awesome-icon icon="user" class="text-muted" />
                     <span class="pl-2">プロフィール</span>
                 </div>
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div>
-                <div class="py-4">ログアウト</div>
+                <div class="py-4" @click="logout">ログアウト</div>
             </div>
         </div>
     </div>
@@ -95,6 +95,14 @@ export default {
             },function(){
                 self.$parent.IsOpensideBar = false;
             });
+        },
+        openProfile(){
+            this.closeAnimationSideMenu()
+            this.$router.push('profile')
+        },
+        logout(){
+            this.closeAnimationSideMenu()
+            this.$router.push('logout')
         }
     }
 }
