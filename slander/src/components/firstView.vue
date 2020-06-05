@@ -106,7 +106,7 @@ export default {
             var params = new URLSearchParams()
             params.append('age', this.age)
             params.append('gender',this.gender)
-            axios.post('http://haseapp.weblike.jp/Slander/',params)
+            axios.post('https://weblike-haseapp.ssl-lolipop.jp/Slander/',params)
                 .then(function (response) {
                     console.log(response);
                 })

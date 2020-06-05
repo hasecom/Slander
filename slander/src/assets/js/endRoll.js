@@ -4,7 +4,7 @@ export const endRoll = {
     'producer_twitter_id':'hase_engineer',
     'description':'当サービスをご利用いただきありがとうございました。今回は、誹謗中傷をテーマにサービスを作成いたしました。軽はずみな投稿から誰かが傷つく場合もあります。一人ひとりが情報モラルを身につけ、より幸せな社会になるように願っております。',
     'cloud_funding':'',
-    'note_url':'https://note.com/maro_note/n/n0c1dbbfc79f6',
+    'note_url':'https://note.com/maro_note/n/n3a58e79b0df9cd',
     'supporter':[
         // {
         //     'name':'たなかけんや',
