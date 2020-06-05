@@ -29,7 +29,7 @@ const router = new VueRouter({
 
 Vue.use(VueAnalytics, {
   id: 'UA-93515507-20',
-  routes
+  router
 })
 
 new Vue({
