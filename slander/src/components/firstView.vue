@@ -5,7 +5,7 @@
         <h1 class="siteTitle py-3">炎上・誹謗中傷<br>擬似体験サービス</h1>
     </div>
     <div class="firstViewBody">
-        <div class="text-center">
+        <div class="text-center pb-4 small">
             このサービスは、普段使っているSNSで<br>
             起うる炎上・誹謗中傷を擬似的に<br>
             体験することができます。
@@ -15,7 +15,7 @@
             <input type="text" id="user_name" class="form-control" v-model="user_name" placeholder="はなこ" maxlength='6'>
         </div>
         <div class="gender">
-            <label class="label">性別</label>
+            <label class="label">性別<span class="compulsion">*</span></label>
             <div class="row mx-0 text-center py-2 font-weight-bold">
                 <div class="col-6">
                     <span id="gender_0" class="border rounded-pill px-4 py-2 gender" @click="genderSelect(0)">男性</span>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="age py-3">
-            <label class="label">年齢</label>
+            <label class="label">年齢<span class="compulsion">*</span></label>
             <div class="row small text-center font-weight-bold">
                 <div class="col-4">
                     <div id="age_0" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(0)">10代未満</div>
@@ -59,7 +59,7 @@
             <input class="form-check-input chkBox" type="checkbox" id="check1b" v-model="checked">
             <label class="form-check-label" for="check1b">同意する</label>
         </div>
-        <div class="text-center py-2 fixed-bottom bg-white border-top shadow-sm">
+        <div class="text-center py-2 fixed-bottom bottom_wrap border-top shadow-sm">
             <button id="start_btn" class="btn btn-lg  btn-danger rounded-pill shadow-sm px-5" @click="start()" disabled>始める</button>
         </div>
     </div>
@@ -194,11 +194,16 @@ export default {
     text-align: center;
     font-size: 30px;
     font-weight: bold;
-    color: yellow;
+    color: white;
+}
+.compulsion{
+    padding:0px 5px;
+    color:#ff7675;
+    font-size:20px;
 }
 
 .label {
-    color: #0984e3;
+    color: white;
     font-weight: bold;
 }
 
@@ -229,7 +234,10 @@ export default {
     transform: scale(1.5);
 }
 .firstViewBody{
-    width:80%;
+    width:85%;
     margin:0 auto;
+}
+.bottom_wrap{
+    background: rgba(250,250,250,1);
 }
 </style>
