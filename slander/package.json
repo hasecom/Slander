@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "popper.js": "^1.16.1",
     "vue": "^2.6.11",
+    "vue-analytics": "^5.22.1",
     "vue-burger-menu": "^2.0.5",
     "vue-pull-to": "^0.1.8",
     "vue-router": "^3.3.1"

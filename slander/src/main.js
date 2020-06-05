@@ -20,11 +20,17 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
 import VueRouter from 'vue-router'
+import VueAnalytics from 'vue-analytics'
 
 Vue.use(VueRouter)
 const router = new VueRouter({ 
   routes,
 });
+
+Vue.use(VueAnalytics, {
+  id: 'UA-93515507-20',
+  routes
+})
 
 new Vue({
   render: h => h(App),
