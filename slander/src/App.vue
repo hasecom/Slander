@@ -255,7 +255,7 @@ export default {
                     }
                 });
                 self.help_reply_after();
-            }, 5 * 1000);
+            }, 4 * 1000);
         },
         help_reply_after() {
             //-------------------------
@@ -287,8 +287,8 @@ export default {
                     if (self.ExistBurnPost) {
                         self.toburnStart();
                     }
-                }, 3 * 1000);
-            }, 2 * 1000);
+                }, 8 * 1000);
+            }, 5 * 1000);
         },
         toburnStart() {
             //-------------------------

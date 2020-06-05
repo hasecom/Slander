@@ -17,7 +17,7 @@ export let user = [
     {
         user_id:3,
         user_name:'親友タロー',
-        icon:'icon4',
+        icon:'icon101',
     },
     {
         user_id:4,

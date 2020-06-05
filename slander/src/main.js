@@ -16,6 +16,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(fas,fab)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
+import axios from 'axios' 
+import VueAxios from 'vue-axios'
+Vue.use(VueAxios, axios) //追記
 
 Vue.config.productionTip = false
 

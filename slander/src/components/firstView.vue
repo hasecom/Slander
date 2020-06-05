@@ -52,7 +52,7 @@
         また、利用者の性別・年齢を収集させていただくためご了承ください。
     </div>
     <div class="form-check text-right py-2">
-        <input class="form-check-input" type="checkbox" id="check1b" v-model="checked">
+        <input class="form-check-input chkBox" type="checkbox" id="check1b" v-model="checked">
         <label class="form-check-label" for="check1b">同意する</label>
     </div>
     <div class="text-center py-2 fixed-bottom bg-white border-top shadow-sm">
@@ -63,6 +63,8 @@
 
 <script>
 import $ from 'jquery';
+import axios from 'axios'
+axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 export default {
     data() {
         return {
@@ -70,6 +72,8 @@ export default {
             genderSelected: false,
             ageSelected: false,
             checked: false,
+            gender:0,
+            age:0,
         }
     },
     watch: {
@@ -92,13 +96,20 @@ export default {
     },
     methods: {
         firstViewCheck() {
-            if(this.genderSelected && this.ageSelected && this.checked){
+            if (this.genderSelected && this.ageSelected && this.checked) {
                 $('#start_btn').prop('disabled', false);
-            }else{
+            } else {
                 $('#start_btn').prop('disabled', true);
             }
         },
         start() {
+            var params = new URLSearchParams()
+            params.append('age', this.age)
+            params.append('gender',this.gender)
+            axios.post('http://haseapp.weblike.jp/Slander/',params)
+                .then(function (response) {
+                    console.log(response);
+                })
             $('body').css('overflow', 'auto');
             $('body').css('position', 'static');
             if (this.user_name != '') {
@@ -107,6 +118,7 @@ export default {
             this.$parent.isFirstView = false;
         },
         ageSelect(age) {
+            this.age = age;
             this.ageSelected = true;
             for (var i = 0; i < 7; i++) {
                 if (i == age) {
@@ -123,6 +135,7 @@ export default {
             }
         },
         genderSelect(gender) {
+            this.gender = gender;
             this.genderSelected = true;
             if (gender == 0) {
                 $('#gender_0').css({
@@ -153,9 +166,9 @@ export default {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 1);
     z-index: 100;
-    padding-bottom:100px !important;
+    padding-bottom: 100px !important;
 }
 
 .siteTitle {
@@ -190,5 +203,9 @@ export default {
     font-size: 15px;
     overflow-y: scroll;
     padding: 10px 5px;
+}
+
+.chkBox {
+    transform: scale(1.5);
 }
 </style>
