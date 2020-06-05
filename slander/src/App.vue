@@ -307,7 +307,7 @@ export default {
                 var reply = "";
                 //-リプライ->typeがREPLYの場合配列からランダムで取り出す
                 if (randType == 2) {
-                    reply = self.userStory.abusive[fnc.getRandomInt(1, 30) - 1];
+                    reply = self.userStory.abusive[fnc.getRandomInt(1, 42) - 1];
                 }
                 var beforeNotice = self.userNotice.length
                 self.userNotice.push({

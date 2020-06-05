@@ -1,62 +1,67 @@
 <template>
-<div id="firstView" class="px-3 py-3">
-    <h1 class="siteTitle py-3">炎上・誹謗中傷擬似体験サイト</h1>
-    <div class="text-center">
-        このサービスは、普段使っているSNSで<br>
-        起うる炎上・誹謗中傷を擬似的に<br>
-        体験することができます。
+<div id="firstView">
+    <div class="page-top">
+        <div class="top-image-wrapper"><img src="../assets/images/top2.png" alt=""></div>
+        <h1 class="siteTitle py-3">炎上・誹謗中傷<br>擬似体験サービス</h1>
     </div>
-    <div class="form-group py-2">
-        <label class="label" for="user_name">名前（ニックネーム）</label>
-        <input type="text" id="user_name" class="form-control" v-model="user_name" placeholder="はなこ" maxlength='6'>
-    </div>
-    <div class="gender">
-        <label class="label">性別</label>
-        <div class="row mx-0 text-center py-2 font-weight-bold">
-            <div class="col-6">
-                <span id="gender_0" class="border rounded-pill px-4 py-2 gender" @click="genderSelect(0)">男性</span>
-            </div>
-            <div class="col-6">
-                <span id="gender_1" class="border rounded-pill px-4 py-2 gender" @click="genderSelect(1)">女性</span>
+    <div class="firstViewBody">
+        <div class="text-center">
+            このサービスは、普段使っているSNSで<br>
+            起うる炎上・誹謗中傷を擬似的に<br>
+            体験することができます。
+        </div>
+        <div class="form-group py-2">
+            <label class="label" for="user_name">名前（ニックネーム）</label>
+            <input type="text" id="user_name" class="form-control" v-model="user_name" placeholder="はなこ" maxlength='6'>
+        </div>
+        <div class="gender">
+            <label class="label">性別</label>
+            <div class="row mx-0 text-center py-2 font-weight-bold">
+                <div class="col-6">
+                    <span id="gender_0" class="border rounded-pill px-4 py-2 gender" @click="genderSelect(0)">男性</span>
+                </div>
+                <div class="col-6">
+                    <span id="gender_1" class="border rounded-pill px-4 py-2 gender" @click="genderSelect(1)">女性</span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="age py-3">
-        <label class="label">年齢</label>
-        <div class="row small text-center font-weight-bold">
-            <div class="col-4">
-                <div id="age_0" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(0)">10代未満</div>
-            </div>
-            <div class="col-4">
-                <div id="age_1" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(1)">10代</div>
-            </div>
-            <div class="col-4">
-                <div id="age_2" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(2)">20代</div>
-            </div>
-            <div class="col-4">
-                <div id="age_3" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(3)">30代</div>
-            </div>
-            <div class="col-4">
-                <div id="age_4" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(4)">40代</div>
-            </div>
-            <div class="col-4">
-                <div id="age_5" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(5)">50代</div>
-            </div>
-            <div class="col-4">
-                <div id="age_6" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(6)">60代以上</div>
+        <div class="age py-3">
+            <label class="label">年齢</label>
+            <div class="row small text-center font-weight-bold">
+                <div class="col-4">
+                    <div id="age_0" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(0)">10代未満</div>
+                </div>
+                <div class="col-4">
+                    <div id="age_1" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(1)">10代</div>
+                </div>
+                <div class="col-4">
+                    <div id="age_2" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(2)">20代</div>
+                </div>
+                <div class="col-4">
+                    <div id="age_3" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(3)">30代</div>
+                </div>
+                <div class="col-4">
+                    <div id="age_4" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(4)">40代</div>
+                </div>
+                <div class="col-4">
+                    <div id="age_5" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(5)">50代</div>
+                </div>
+                <div class="col-4">
+                    <div id="age_6" class="border py-2 px-1  rounded-pill my-2" @click="ageSelect(6)">60代以上</div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="border note">
-        当サービスは、一部過激な表現を含んでいるため、トラウマをお持ちの方や児童のご利用は、ご注意ください。
-        また、利用者の性別・年齢を収集させていただくためご了承ください。
-    </div>
-    <div class="form-check text-right py-2">
-        <input class="form-check-input chkBox" type="checkbox" id="check1b" v-model="checked">
-        <label class="form-check-label" for="check1b">同意する</label>
-    </div>
-    <div class="text-center py-2 fixed-bottom bg-white border-top shadow-sm">
-        <button id="start_btn" class="btn btn-lg  btn-danger rounded-pill shadow-sm px-5" @click="start()" disabled>始める</button>
+        <div class="border note">
+            当サービスは、一部過激な表現を含んでいるため、トラウマをお持ちの方や児童のご利用は、ご注意ください。
+            また、利用者の性別・年齢を収集させていただくためご了承ください。
+        </div>
+        <div class="form-check text-right py-2">
+            <input class="form-check-input chkBox" type="checkbox" id="check1b" v-model="checked">
+            <label class="form-check-label" for="check1b">同意する</label>
+        </div>
+        <div class="text-center py-2 fixed-bottom bg-white border-top shadow-sm">
+            <button id="start_btn" class="btn btn-lg  btn-danger rounded-pill shadow-sm px-5" @click="start()" disabled>始める</button>
+        </div>
     </div>
 </div>
 </template>
@@ -72,8 +77,8 @@ export default {
             genderSelected: false,
             ageSelected: false,
             checked: false,
-            gender:0,
-            age:0,
+            gender: 0,
+            age: 0,
         }
     },
     watch: {
@@ -91,6 +96,7 @@ export default {
 
     },
     mounted() {
+        $('.page-top').width($(window).width()).height($(window).height());
         $('body').css('overflow', 'hidden');
         $('body').css('position', 'fixed');
     },
@@ -105,11 +111,8 @@ export default {
         start() {
             var params = new URLSearchParams()
             params.append('age', this.age)
-            params.append('gender',this.gender)
-            axios.post('https://weblike-haseapp.ssl-lolipop.jp/Slander/',params)
-                .then(function (response) {
-                    console.log(response);
-                })
+            params.append('gender', this.gender)
+            axios.post('https://weblike-haseapp.ssl-lolipop.jp/Slander/', params);
             $('body').css('overflow', 'auto');
             $('body').css('position', 'static');
             if (this.user_name != '') {
@@ -128,8 +131,8 @@ export default {
                     })
                 } else {
                     $('#age_' + i).css({
-                        "background": "white",
-                        "color": "black"
+                        "background": "#2d3436",
+                        "color": "white"
                     })
                 }
             }
@@ -143,13 +146,13 @@ export default {
                     "color": "white"
                 })
                 $('#gender_1').css({
-                    "background": "white",
-                    "color": "#ff7675"
+                    "background": "#2d3436",
+                    "color": "white"
                 })
             } else {
                 $('#gender_0').css({
-                    "background": "white",
-                    "color": "#0984e3"
+                    "background": "#2d3436",
+                    "color": "white"
                 })
                 $('#gender_1').css({
                     "background": "#ff7675",
@@ -157,6 +160,13 @@ export default {
                 })
             }
         }
+    },
+    computed: {
+        imageLoad: function () {
+            return function (fileName) {
+                return require('../assets/images/' + fileName + '.jpg');
+            }
+        },
     }
 }
 </script>
@@ -166,15 +176,25 @@ export default {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 1);
     z-index: 100;
     padding-bottom: 100px !important;
+    background: #2d3436;
+    color: white;
+}
+
+.top-image-wrapper>img {
+    width: 100%;
+}
+
+.page-top {
+    background: #2d3436;
 }
 
 .siteTitle {
     text-align: center;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
+    color: yellow;
 }
 
 .label {
@@ -207,5 +227,9 @@ export default {
 
 .chkBox {
     transform: scale(1.5);
+}
+.firstViewBody{
+    width:80%;
+    margin:0 auto;
 }
 </style>
