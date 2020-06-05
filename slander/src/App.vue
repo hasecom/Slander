@@ -23,7 +23,7 @@
             <Footer :siteInfoLabel="siteInfoArr" />
         </div>
     </div>
-    <div class="pc">
+    <div v-else class="pc">
         <div class="row">
             <div class="pc_body col-6 px-0">
                 <div class="pc_title text-center">
