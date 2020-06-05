@@ -97,6 +97,7 @@ export default {
     },
     mounted() {
         $('.page-top').width($(window).width()).height($(window).height());
+        $('.top-image-wrapper > img').height($(window).height() - 104);
         $('body').css('overflow', 'hidden');
         $('body').css('position', 'fixed');
     },
@@ -181,9 +182,13 @@ export default {
     background: #2d3436;
     color: white;
 }
-
+.top-image-wrapper {
+    text-align: center;
+    background:#d63031;
+    overflow-x: hidden;
+}
 .top-image-wrapper>img {
-    width: 100%;
+    object-fit: cover;
 }
 
 .page-top {

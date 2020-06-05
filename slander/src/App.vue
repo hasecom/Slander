@@ -1,25 +1,45 @@
 <template>
 <div id="app">
-    <FirstView v-if="isFirstView" />
-    <EndRoll v-if="EndRaul" :EndRollArr="endRollArr" :EndPattern="endPatternStr" />
-    <TerminalNotice v-if="IsterminalNotice" :terminal_notice_name="Terminal_notice_name" :terminal_notice_message="Terminal_notice_message" :terminal_notice_type="Terminal_notice_type" />
-    <div id="content">
-        <Header :userInfoLabel="userInfoArr" :PageTitle="pageTitle" />
-        <pull-to :top-load-method="refresh" v-if="!IsOpenOtherPage" :top-config="config" @top-state-change="stateChange" :is-bottom-bounce="false" :is-top-bounce="movepullTo">
-            <div id="main">
-                <router-view ref="router_view"></router-view>
+    <div v-if="isPhone">
+        <FirstView v-if="isFirstView" />
+        <EndRoll v-if="EndRaul" :EndRollArr="endRollArr" :EndPattern="endPatternStr" />
+        <TerminalNotice v-if="IsterminalNotice" :terminal_notice_name="Terminal_notice_name" :terminal_notice_message="Terminal_notice_message" :terminal_notice_type="Terminal_notice_type" />
+        <div id="content">
+            <Header :userInfoLabel="userInfoArr" :PageTitle="pageTitle" />
+            <pull-to :top-load-method="refresh" v-if="!IsOpenOtherPage" :top-config="config" @top-state-change="stateChange" :is-bottom-bounce="false" :is-top-bounce="movepullTo">
+                <div id="main">
+                    <router-view ref="router_view"></router-view>
+                </div>
+            </pull-to>
+            <div v-if="IsOpenOtherPage" id="main">
+                <router-view></router-view>
             </div>
-        </pull-to>
-        <div v-if="IsOpenOtherPage" id="main">
-            <router-view></router-view>
-        </div>
 
-        <div class="fixed-button-wrapper">
-            <PostBtn :PageParam="pageParam" />
-        </div>
+            <div class="fixed-button-wrapper">
+                <PostBtn :PageParam="pageParam" />
+            </div>
 
-        <SideBar v-if="IsOpensideBar" :userInfoLabel="userInfoArr" />
-        <Footer :siteInfoLabel="siteInfoArr" />
+            <SideBar v-if="IsOpensideBar" :userInfoLabel="userInfoArr" />
+            <Footer :siteInfoLabel="siteInfoArr" />
+        </div>
+    </div>
+    <div class="pc">
+        <div class="row">
+            <div class="pc_body col-6 px-0">
+                <div class="pc_title text-center">
+                    炎上・誹謗中傷<br>擬似体験サービス
+                </div>
+                <div class="pc_inner_body">
+                    <div class="pc_inner_child">下記のQRをスマホで読み取ってください</div>
+                    <div class="pc_qr_wrapper">
+                        <img src="./assets/images/qr.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="pc_img_wrapper col-6 px-0">
+                <img src="./assets/images/top2.png" alt="">
+            </div>
+        </div>
     </div>
 </div>
 </template>
@@ -209,7 +229,7 @@ export default {
         //768px以上ならば
         if (768 <= $(window).width()) {
             this.isPhone = false;
-            alert('このサイトは、スマホ専用です。PCは対応しておりません。')
+
         }
     },
     methods: {
@@ -517,26 +537,52 @@ export default {
 #main {
     padding-bottom: 30px;
 }
-@media screen and (min-width:600px) { 
-    #firstView,#content, .fixed-bottom,#terminalNoitce,#post,.dmdynamic,#sideBar,#profile,#logout,.endrollWrapper{
-        width:500px !important;
-        margin:0 auto;
-    }
-    #firstView{
-        left:0;
-        right:0;
-    }
-    body{
-        width: 100%;
-        height:300px;
-    }
-    .fixed-button-wrapper{
-        right:30%;
-    }
-    #app{
-        background:#2d3436;
-    }
 
+.pc {
+    padding: 0px 0px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: #2d3436;
+    color: white;
+}
 
+.pc_img_wrapper{
+    background: #d63031;
+}
+.pc_img_wrapper>img {
+    width: 500px;
+}
+
+.pc_title {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.pc_inner_body {
+    background: #ffeaa7;
+    width: 100%;
+    height: 300px;
+    position:absolute;
+    bottom:0;
+}
+
+.pc_qr_wrapper {
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pc_inner_child{
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
 }
 </style>
