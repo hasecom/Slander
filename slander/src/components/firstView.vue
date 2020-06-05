@@ -97,7 +97,7 @@ export default {
     },
     mounted() {
         $('.page-top').width($(window).width()).height($(window).height());
-        $('.top-image-wrapper > img').height($(window).height() - 104);
+        $('.top-image-wrapper > img').height($(window).height() - 160);
         $('body').css('overflow', 'hidden');
         $('body').css('position', 'fixed');
     },
