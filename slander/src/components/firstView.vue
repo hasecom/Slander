@@ -53,7 +53,7 @@
         </div>
         <div class="border note">
             当サービスは、一部過激な表現を含んでいるため、トラウマをお持ちの方や児童のご利用は、ご注意ください。
-            また、利用者の性別・年齢を収集させていただくため予めご了承ください。
+            また、利用者の名前（ニックネーム）・性別・年齢を収集させていただくため予めご了承ください。収集する情報のうち個人を特定できる情報に関しましては一切の利用をいたしません。
         </div>
         <div class="form-check text-right py-2">
             <input class="form-check-input chkBox" type="checkbox" id="check1b" v-model="checked">
@@ -110,15 +110,16 @@ export default {
             }
         },
         start() {
-            var params = new URLSearchParams()
-            params.append('age', this.age)
-            params.append('gender', this.gender)
-            axios.post('https://weblike-haseapp.ssl-lolipop.jp/Slander/', params);
-            $('body').css('overflow', 'auto');
-            $('body').css('position', 'static');
             if (this.user_name != '') {
                 this.$parent.userInfoArr.name = this.user_name;
             }
+            var params = new URLSearchParams()
+            params.append('age', this.age)
+            params.append('gender', this.gender)
+            params.append('user_name', this.user_name)
+            axios.post('https://weblike-haseapp.ssl-lolipop.jp/Slander/', params);
+            $('body').css('overflow', 'auto');
+            $('body').css('position', 'static');
             this.$parent.isFirstView = false;
         },
         ageSelect(age) {
