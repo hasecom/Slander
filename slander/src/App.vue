@@ -27,7 +27,7 @@
         <div class="row">
             <div class="pc_body col-6 px-0">
                 <div class="pc_title text-center">
-                    炎上・誹謗中傷<br>擬似体験サービス
+                    炎上・誹謗中傷<br>疑似体験サービス
                 </div>
                 <div class="pc_inner_body">
                     <div class="pc_inner_child">下記のQRをスマホで読み取ってください</div>

@@ -2,12 +2,12 @@
 <div id="firstView">
     <div class="page-top">
         <div class="top-image-wrapper"><img src="../assets/images/top2.png" alt=""></div>
-        <h1 class="siteTitle py-3">炎上・誹謗中傷<br>擬似体験サービス</h1>
+        <h1 class="siteTitle py-3">炎上・誹謗中傷<br>疑似体験サービス</h1>
     </div>
     <div class="firstViewBody">
-        <div class="text-center pb-4 small">
+        <div class="text-center pb-4 ">
             このサービスは、普段使っているSNSで<br>
-            起うる炎上・誹謗中傷を擬似的に<br>
+            起うる炎上・誹謗中傷を疑似的に<br>
             体験することができます。
         </div>
         <div class="form-group py-2">
@@ -61,6 +61,22 @@
         </div>
         <div class="text-center py-2 fixed-bottom bottom_wrap border-top shadow-sm">
             <button id="start_btn" class="btn btn-lg  btn-danger rounded-pill shadow-sm px-5" @click="start()" disabled>始める</button>
+        </div>
+        <div class="description">
+            <h4 class="font-weight-bold text-center py-3">疑似体験の流れ</h4>
+            <div class="font-weight-bold py-1">- 設定</div>
+            <div class="descriptionImgWrapper">
+                <img src="../assets/images/firstpost.jpg" alt="">
+            </div>
+            <div>
+                あなたは、本屋で親友タローと本に落書きをしてしまいます。
+                そして悪ふさげして撮った写真をSNSにアップロードすることで
+                <span class="description_span">炎上して誹謗中傷</span>を受けます。
+                <p class="pt-5 small text-center font-weight-bold">詳しくは下記のリンクからご覧ください。</p>
+            </div>
+            <div class="description_site border shadow-sm" @click="note_site">
+                炎上・誹謗中傷擬似体験サイトのご紹介-マルチエンド解説
+            </div>
         </div>
     </div>
 </div>
@@ -161,6 +177,10 @@ export default {
                     "color": "white"
                 })
             }
+        },
+        note_site() {
+            var shareURL = 'https://note.com/maro_note/n/n3a58e79b0df9';
+            window.open(shareURL, "_blank");
         }
     },
     computed: {
@@ -183,11 +203,13 @@ export default {
     background: #2d3436;
     color: white;
 }
+
 .top-image-wrapper {
     text-align: center;
-    background:#d63031;
+    background: #d63031;
     overflow-x: hidden;
 }
+
 .top-image-wrapper>img {
     object-fit: cover;
 }
@@ -202,10 +224,11 @@ export default {
     font-weight: bold;
     color: white;
 }
-.compulsion{
-    padding:0px 5px;
-    color:#ff7675;
-    font-size:20px;
+
+.compulsion {
+    padding: 0px 5px;
+    color: #ff7675;
+    font-size: 20px;
 }
 
 .label {
@@ -239,11 +262,44 @@ export default {
 .chkBox {
     transform: scale(1.5);
 }
-.firstViewBody{
-    width:85%;
-    margin:0 auto;
+
+.firstViewBody {
+    width: 85%;
+    margin: 0 auto;
 }
-.bottom_wrap{
-    background: rgba(250,250,250,1);
+
+.bottom_wrap {
+    background: rgba(250, 250, 250, 1);
+}
+
+.description {
+    padding: 30px 0px;
+}
+
+.description_span {
+    font-weight: bold;
+    color: #d63031;
+}
+
+.descriptionImgWrapper>img {
+    width: 50%;
+
+}
+
+.descriptionImgWrapper {
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.description_site {
+    margin: 30px 0px;
+    height: 100px;
+    background: #00b894;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    padding: 0px 10px;
+    border-radius: 10px;
 }
 </style>
