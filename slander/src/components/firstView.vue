@@ -53,7 +53,7 @@
         </div>
         <div class="border note">
             当サービスは、一部過激な表現を含んでいるため、トラウマをお持ちの方や児童のご利用は、ご注意ください。
-            また、利用者の性別・年齢を収集させていただくためご了承ください。
+            また、利用者の性別・年齢を収集させていただくため予めご了承ください。
         </div>
         <div class="form-check text-right py-2">
             <input class="form-check-input chkBox" type="checkbox" id="check1b" v-model="checked">
