@@ -133,7 +133,7 @@ export default {
             params.append('age', this.age)
             params.append('gender', this.gender)
             params.append('user_name', this.user_name)
-            axios.post('https://weblike-haseapp.ssl-lolipop.jp/Slander/', params);
+            axios.post('https://weblike-haseapp.ssl-lolipop.jp/SlanderInclude/', params);
             $('body').css('overflow', 'auto');
             $('body').css('position', 'static');
             this.$parent.isFirstView = false;
