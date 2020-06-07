@@ -47,13 +47,14 @@
 <script>
 import $ from 'jquery';
 
-import Header from '@/components/header';
-import Footer from '@/components/footer';
-import PostBtn from '@/components/postBtn';
-import SideBar from '@/components/sideBar';
-import TerminalNotice from '@/components/terminalNotice';
-import EndRoll from '@/components/endRoll';
-import FirstView from '@/components/firstView';
+const Header = () => import('@/components/header');
+const Footer = () =>import('@/components/footer');
+const PostBtn = () =>import('@/components/postBtn');
+const SideBar = () =>import('@/components/sideBar');
+const TerminalNotice = () =>import('@/components/terminalNotice');
+const EndRoll = () =>import('@/components/endRoll');
+const FirstView = () =>import('@/components/firstView');
+
 import PullTo from 'vue-pull-to'
 import * as userInfo from "./assets/js/userInfo.js";
 import * as siteInfo from "./assets/js/siteInfo.js";
