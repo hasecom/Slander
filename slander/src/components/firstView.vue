@@ -108,9 +108,6 @@ export default {
             this.firstViewCheck();
         }
     },
-    created() {
-
-    },
     mounted() {
         $('.page-top').width($(window).width()).height($(window).height());
         $('.top-image-wrapper > img').height($(window).height() - 160);

@@ -48,11 +48,11 @@
 import $ from 'jquery';
 
 const Header = () => import('@/components/header');
-const Footer = () =>import('@/components/footer');
-const PostBtn = () =>import('@/components/postBtn');
-const SideBar = () =>import('@/components/sideBar');
-const TerminalNotice = () =>import('@/components/terminalNotice');
-const EndRoll = () =>import('@/components/endRoll');
+const Footer = () => import('@/components/footer');
+const PostBtn = () => import('@/components/postBtn');
+const SideBar = () => import('@/components/sideBar');
+const TerminalNotice = () => import('@/components/terminalNotice');
+const EndRoll = () => import('@/components/endRoll');
 import FirstView from '@/components/firstView';
 
 import PullTo from 'vue-pull-to'
@@ -215,23 +215,25 @@ export default {
         }
     },
     created() {
-        this.userInfoArr = userInfo['userInfo'];
-        this.siteInfoArr = siteInfo['siteInfo'];
+        const importJs = Promise.resolve();
         this.timeLine = TimeLine['timeline01'];
-        this.userStory = userStory;
-        this.user = User['user'];
-        this.userpost = UserPost['userPost'];
-        this.userNotice = UserNotice['userNotice'];
-        this.userDm = UserDm['userDm'];
-        this.endRollArr = EndRollInfo['endRoll'];
-        this.userDmDynamic = UserDmDynamic['userDmDynamic'];
-        this.trendList = TrendList['trendList']
+        importJs.then(() => {
+            this.userInfoArr = userInfo['userInfo'];
+            this.siteInfoArr = siteInfo['siteInfo'];
+            this.userStory = userStory;
+            this.user = User['user'];
+            this.userpost = UserPost['userPost'];
+            this.userNotice = UserNotice['userNotice'];
+            this.userDm = UserDm['userDm'];
+            this.endRollArr = EndRollInfo['endRoll'];
+            this.userDmDynamic = UserDmDynamic['userDmDynamic'];
+            this.trendList = TrendList['trendList'];
+        });
     },
     mounted() {
         //768px以上ならば
         if (768 <= $(window).width()) {
             this.isPhone = false;
-
         }
     },
     methods: {
@@ -550,9 +552,10 @@ export default {
     color: white;
 }
 
-.pc_img_wrapper{
+.pc_img_wrapper {
     background: #d63031;
 }
+
 .pc_img_wrapper>img {
     width: 500px;
 }
@@ -566,17 +569,18 @@ export default {
     background: #ffeaa7;
     width: 100%;
     height: 300px;
-    position:absolute;
-    bottom:0;
+    position: absolute;
+    bottom: 0;
 }
 
 .pc_qr_wrapper {
-    height:100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.pc_inner_child{
+
+.pc_inner_child {
     text-align: center;
     color: black;
     font-weight: bold;
