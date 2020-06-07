@@ -12,12 +12,12 @@
     </div>
     <div class="post-main row">
         <div class="post-icon-wrapper col-3 text-center">
-            <img :src="iconPath" alt="" class="rounded-circle border">
+            <img v-lazy="iconPath" alt="" class="rounded-circle border">
         </div>
         <div class="post-textarea col-9">
             <textarea name="" id="postTextarea" cols="20" rows="4" placeholder="いまなにしてる？" v-bind:readonly="is_readonly"></textarea>
             <div class="first_post_img" v-if="this.$parent.userStory != undefined ? !this.$parent.userStory['firstPost'] : false">
-                <img class="border" :src="imageLoad(this.$parent.userStory['postAction'][0].imagePath)" alt="">
+                <img class="border" v-lazy="imageLoad(this.$parent.userStory['postAction'][0].imagePath)" alt="">
             </div>
         </div>
     </div>

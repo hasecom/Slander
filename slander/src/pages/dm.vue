@@ -4,7 +4,7 @@
         <router-link :to="'dm/'+ item.dm_id" tag="li" v-for="(item,index) in $parent.$parent.dmArr" :key="index" class="row mg-0 border-bottom dm" :style="Read(item.read)">
             <div class="col-3 px-0 left_item">
                 <div class="reply_icon rounded-circle border my-2">
-                    <img v-if="item.icon != ''" class="border rounded-circle" :src="imageLoad(item.icon)" alt="">
+                    <img v-if="item.icon != ''" class="border rounded-circle" v-lazy="imageLoad(item.icon)" alt="">
                 </div>
             </div>
             <div class="col-9 px-0">

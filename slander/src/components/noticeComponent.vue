@@ -7,7 +7,7 @@
             <div v-if="item[0].type==2" class="row py-2 px-1 border-bottom">
                 <div class="col-3 left_item">
                     <div class="reply_icon rounded-circle border my-2">
-                        <img v-if="item[0].icon != ''" class="border rounded-circle" :src="imageLoad(item[0].icon)" alt="">
+                        <img v-if="item[0].icon != ''" class="border rounded-circle" v-lazy="imageLoad(item[0].icon)" alt="">
                     </div>
                 </div>
                 <div class="col-9 notice_info">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-9">
                         <div class="icon rounded-circle border my-2">
-                            <img v-if="item[0].icon != ''" class="border rounded-circle" :src="imageLoad(item[0].icon)" alt="">
+                            <img v-if="item[0].icon != ''" class="border rounded-circle" v-lazy="imageLoad(item[0].icon)" alt="">
                         </div>
                         <div class="notice_info">
                             <span class="font-weight-bold">{{item[0].user_name}}</span>さん
@@ -66,7 +66,7 @@
                     <div class="row mx-0 justify-content-start">
                         <div class="col-1 px-0 mr-3" v-for="(inner,index) in item" :key="index">
                             <div class="icon rounded-circle border my-2" v-if="index < 6">
-                                <img v-if="inner.icon != ''" class="border rounded-circle d-inline" :src="imageLoad(inner.icon)" alt="">
+                                <img v-if="inner.icon != ''" class="border rounded-circle d-inline" v-lazy="imageLoad(inner.icon)" alt="">
                             </div>
                         </div>
                     </div>

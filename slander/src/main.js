@@ -24,7 +24,8 @@ Vue.config.productionTip = false
 
 import VueRouter from 'vue-router'
 import VueAnalytics from 'vue-analytics'
-
+import VueLazyload from "vue-lazyload";
+Vue.use(VueLazyload);
 Vue.use(VueRouter)
 const router = new VueRouter({ 
   routes,

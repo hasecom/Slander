@@ -17,7 +17,7 @@
                 <div class="row  mg-0 post">
                     <div class="col-2 px-0">
                         <div class="icon rounded-circle border">
-                            <img v-if="item['iconPath']" class="border rounded-circle" :src="item['iconPath'] != '' ? imageLoad(item['iconPath']) : ''" alt="">
+                            <img v-if="item['iconPath']" class="border rounded-circle" v-lazy="item['iconPath'] != '' ? imageLoad(item['iconPath']) : ''" alt="">
                         </div>
                     </div>
                     <div class="col-10 pl-3 pr-0">
@@ -30,7 +30,7 @@
                         </div>
                         <div>{{item['message']}}</div>
                         <div class="timeline_image">
-                            <img v-if="item['imagePath']" class="border" :src="item['imagePath'] != '' ? imageLoad(item['imagePath']) : ''" alt="">
+                            <img v-if="item['imagePath']" class="border" v-lazy="item['imagePath'] != '' ? imageLoad(item['imagePath']) : ''" alt="">
                         </div>
                         <div class="row text-muted text-center pt-3">
                             <div class="col-3 px-0">

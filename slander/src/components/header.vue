@@ -1,7 +1,7 @@
 <template>
 <div id="header" class="shadow-sm row mx-0 sticky-top">
     <div class="header-icon-wrapper col-2">
-        <img :src="iconPath" alt="" class="rounded-circle border" @click="$parent.IsOpensideBar = true">
+        <img v-lazy="iconPath" alt="" class="rounded-circle border" @click="$parent.IsOpensideBar = true">
     </div>
     <div class="col-7 page-title">
         {{PageTitle}}

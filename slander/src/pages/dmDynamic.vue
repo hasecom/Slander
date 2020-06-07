@@ -22,7 +22,7 @@
                 <div v-else class="text-left row mx-0 my-3">
                     <div class="col-2 px-0">
                         <div class="icon rounded-circle border my-2">
-                            <img v-if="OneParsondm.icon != ''" class="border rounded-circle" :src="imageLoad(OneParsondm.icon)" alt="">
+                            <img v-if="OneParsondm.icon != ''" class="border rounded-circle" v-lazy="imageLoad(OneParsondm.icon)" alt="">
                         </div>
                     </div>
                     <div class="col-10 px-0 you_msgWrap">

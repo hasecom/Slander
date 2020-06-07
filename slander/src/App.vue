@@ -46,6 +46,7 @@
 
 <script>
 import $ from 'jquery';
+
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import PostBtn from '@/components/postBtn';

@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-5">
                     <div class="profile-icon-wrapper">
-                        <img v-if="userInfoArr.icon != undefined" :src="imageLoad(userInfoArr.icon)" alt="" class="rounded-circle border">
+                        <img v-if="userInfoArr.icon != undefined" v-lazy="imageLoad(userInfoArr.icon)" alt="" class="rounded-circle border">
                     </div>
                 </div>
                 <div class="col-7 py-2 profile_btn" v-if="!$parent.IsEnd && !$parent.IsTimeOut">
@@ -48,7 +48,7 @@
                     <div class="row  mx-0 post">
                         <div class="col-2 px-0">
                             <div class="icon rounded-circle border">
-                                <img v-if="userInfoArr.icon != undefined" :src="imageLoad(userInfoArr.icon)" alt="" class="rounded-circle border">
+                                <img v-if="userInfoArr.icon != undefined" v-lazy="imageLoad(userInfoArr.icon)" alt="" class="rounded-circle border">
                             </div>
                         </div>
                         <div class="col-10 pl-3 pr-0">
@@ -61,7 +61,7 @@
                             </div>
                             <div>{{item['message']}}</div>
                             <div class="timeline_image">
-                                <img v-if="item['imagePath']" class="border" :src="item['imagePath'] != '' ? imageLoad(item['imagePath']) : ''" alt="">
+                                <img v-if="item['imagePath']" class="border" v-lazy="item['imagePath'] != '' ? imageLoad(item['imagePath']) : ''" alt="">
                             </div>
                             <div class="row text-muted text-center pt-3">
                                 <div class="col-3 px-0">
