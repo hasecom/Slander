@@ -53,7 +53,7 @@ const PostBtn = () =>import('@/components/postBtn');
 const SideBar = () =>import('@/components/sideBar');
 const TerminalNotice = () =>import('@/components/terminalNotice');
 const EndRoll = () =>import('@/components/endRoll');
-const FirstView = () =>import('@/components/firstView');
+import FirstView from '@/components/firstView';
 
 import PullTo from 'vue-pull-to'
 import * as userInfo from "./assets/js/userInfo.js";
