@@ -14,7 +14,19 @@ export let trendList = [
                 repost:0,
                 replyCnt:0,
                 timestamp:""
-            }
+            },
+            {
+                id:"1",
+                name:'らら',
+                type:0,//0は他人1は自分
+                message:'誹謗中傷をした人に正義と勘違いして誹謗中傷するのも問題。あくまで第三者ってことを忘れないで。',
+                imagePath:"",
+                iconPath:"icon81",
+                good:0,
+                repost:0,
+                replyCnt:0,
+                timestamp:""
+            },
         ],
     },
     {

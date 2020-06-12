@@ -12,15 +12,23 @@
                 <div class="font-weight-bold">{{trend.name}}</div>
             </router-link>
         </ul>
+        <ul>
+            <router-link :to="'share/'+ trend.id+'/?name='+trend.room_name+'&id=' + trend.id"  tag="li" v-for="(trend,index) in slanderlist" :key="index" class="border-bottom px-2 py-4">
+                <div class="font-weight-bold">{{trend.room_name}}</div>
+            </router-link>
+        </ul>
     </div>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
+axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 export default {
     data() {
         return {
-            trendList: []
+            trendList: [],
+            slanderlist:[]
         }
     },
     mounted() {
@@ -29,6 +37,12 @@ export default {
     methods: {
         _mounted() {
             this.trendList = this.$parent.$parent.trendList;
+
+            var params = new URLSearchParams()
+            axios.post('https://weblike-haseapp.ssl-lolipop.jp/SlanderInclude/slanderGetList.php', params)
+            .then(response => {
+                this.slanderlist = response['data']
+            });
         }
     }
 }
@@ -51,7 +65,10 @@ export default {
 .tr-title {
     font-size: 20px;
 }
+
 ul {
     padding: 0px;
+    margin-bottom:0px;
 }
+
 </style>

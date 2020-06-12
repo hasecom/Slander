@@ -51,12 +51,11 @@ export default {
     },
     methods: {
         post() {
-            //投稿ボタンを押したら
-            this.$router.push('/')
-            var postFirstAction = this.$parent.userStory['postAction'][0];
-
             //初回
             if (!this.$parent.userStory['firstPost']) {
+                //投稿ボタンを押したら
+                this.$router.push('/')
+                var postFirstAction = this.$parent.userStory['postAction'][0];
                 this.$parent.timeLine.push({
                     id: this.$parent.userStory.BurnId,
                     name: this.userInfoArr['name'],
@@ -86,8 +85,8 @@ export default {
         }
     },
     computed: {
-        imageLoad:function() {
-            return function(fileName){
+        imageLoad: function () {
+            return function (fileName) {
                 return require('../assets/images/' + fileName + '.jpg');
             }
         },

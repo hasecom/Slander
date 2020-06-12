@@ -366,20 +366,27 @@ export default {
         },
         InloopAction(counter) {
             if (counter == 20) {
+                //誹謗中傷メール
                 this.terminal_notice_set_fnc(message['line']['1']['name'], message['line']['1']['message'], 0);
             } else if (counter == 30) {
+                //誹謗中傷メール
                 this.terminal_notice_set_fnc(message['mail']['0']['name'], message['mail']['0']['message'], 1);
             } else if (counter == 40) {
+                //誹謗中傷メール
                 this.terminal_notice_set_fnc(message['mail']['1']['name'], message['mail']['1']['message'], 1);
             } else if (counter == 50) {
+                //誹謗中傷メール
                 this.terminal_notice_set_fnc(message['mail']['2']['name'], message['mail']['2']['message'], 1);
             } else if (counter == 60) {
+                //父からのLINE
                 this.terminal_notice_set_fnc(message['line']['2']['name'], message['line']['2']['message'], 0);
-            } else if (counter == 70) {
+            } else if (counter == 80) {
+                //母からのLINE
                 this.terminal_notice_set_fnc(message['line']['3']['name'], message['line']['3']['message'], 0);
-            } else if (counter == 100) {
+            } else if (counter == 110) {
+                //父からのLINE
                 this.terminal_notice_set_fnc(message['line']['4']['name'], message['line']['4']['message'], 0);
-            } else if (counter == 200) {
+            } else if (counter == 170) {
                 this.$router.push('call')
             }
         },

@@ -8,7 +8,8 @@ import TrendPage from '@/pages/trendPage'
 import Call from '@/pages/call'
 import Profile from '@/pages/profile'
 import Logout from '@/pages/logout'
-
+import Share from '@/pages/share'
+import TrendPost from '@/pages/trendPost'
 
 export default [
     {
@@ -50,6 +51,14 @@ export default [
     {
       path: '/logout',
       component:Logout
+    },
+    {
+      path: '/share/:id',
+      component:Share
+    },
+    {
+      path: '/trendPost/:id/:name',
+      component:TrendPost
     },
 
 ]

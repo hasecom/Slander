@@ -2,7 +2,7 @@ export let line = [
     {
         param:'0',
         name:'親友タロー',
-        message:'あの写真投稿しておいて！'
+        message:'本屋で落書きした写真投稿しておいて！'
     },
     {
         param:'1',

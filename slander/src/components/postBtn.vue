@@ -1,8 +1,8 @@
 <template>
 <div class="">
-    <router-link :to="PageParam == 'dm' ? '' : 'post'" tag='button' class="btn footer-router-link post-button rounded-circle shadow-sm border">
+    <button @click="ClickPostBtn" class="btn footer-router-link post-button rounded-circle shadow-sm border">
         <font-awesome-icon :icon="ChangeIcon()" class="font-awesome-icon-element" />
-    </router-link>
+    </button>
 </div>
 </template>
 
@@ -19,6 +19,18 @@ export default {
                 return 'envelope'
             }
             return 'feather-alt'
+        },
+        ClickPostBtn() {
+            if (!this.$route['path'].indexOf('/share/')) {
+                this.$router.push({
+                    path: '/trendPost/' + this.$route['query']['id'] +'/'+  this.$route['query']['name']
+                })
+            } else {
+                var toPath = this.PageParam == 'dm' ? '' : '/post';
+                this.$router.push({
+                    path: toPath
+                })
+            }
         }
     },
 }
