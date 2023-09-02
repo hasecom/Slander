@@ -126,11 +126,6 @@ export default {
             if (this.user_name != '') {
                 this.$parent.userInfoArr.name = this.user_name;
             }
-            var params = new URLSearchParams()
-            params.append('age', this.age)
-            params.append('gender', this.gender)
-            params.append('user_name', this.user_name)
-            axios.post('https://weblike-haseapp.ssl-lolipop.jp/SlanderInclude/', params);
             $('body').css('overflow', 'auto');
             $('body').css('position', 'static');
             this.$parent.isFirstView = false;

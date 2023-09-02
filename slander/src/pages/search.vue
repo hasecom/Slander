@@ -37,12 +37,6 @@ export default {
     methods: {
         _mounted() {
             this.trendList = this.$parent.$parent.trendList;
-
-            var params = new URLSearchParams()
-            axios.post('https://weblike-haseapp.ssl-lolipop.jp/SlanderInclude/slanderGetList.php', params)
-            .then(response => {
-                this.slanderlist = response['data']
-            });
         }
     }
 }

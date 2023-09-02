@@ -48,12 +48,6 @@ export default {
     methods: {
         _mounted() {
             this.room_name = this.$route.query.name;
-            var params = new URLSearchParams()
-            params.append('room_id', this.$route.params.id)
-            axios.post('https://weblike-haseapp.ssl-lolipop.jp/SlanderInclude/slanderGetMessage.php', params)
-                .then(response => {
-                    this.slander_message = response['data'];
-                });
         }
     }
 }

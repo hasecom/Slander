@@ -47,17 +47,6 @@ export default {
     },
     methods: {
         post() {
-            var self = this;
-            var room_id = this.$route.params.id;
-            var room_name = this.$route.params.name;
-            var params = new URLSearchParams();
-            params.append('room_id', this.$route.params.id);
-            params.append('user_name', this.userInfoArr.name);
-            params.append('message', this.postTextAreaVal);
-            axios.post('https://weblike-haseapp.ssl-lolipop.jp/SlanderInclude/slanderPostMessage.php', params)
-                .then(function(){
-                    self.$router.push('/share/' + room_id  + '/?name=' +  room_name);
-                });
         }
     },
     computed: {
