@@ -74,9 +74,6 @@
                 <span class="description_span">炎上して誹謗中傷</span>を受けます。
                 <p class="pt-5 small text-center font-weight-bold">詳しくは下記のリンクからご覧ください。</p>
             </div>
-            <div class="description_site border shadow-sm" @click="note_site">
-                炎上・誹謗中傷擬似体験サイトのご紹介-マルチエンド解説
-            </div>
         </div>
     </div>
 </div>
@@ -170,10 +167,6 @@ export default {
                 })
             }
         },
-        note_site() {
-            var shareURL = 'https://note.com/maro_note/n/n3a58e79b0df9';
-            window.open(shareURL, "_blank");
-        }
     },
     computed: {
         imageLoad: function () {

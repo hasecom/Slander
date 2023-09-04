@@ -50,9 +50,6 @@
             <div>
                 <div class="py-4" @click="logout">ログアウト</div>
             </div>
-            <div>
-                <a href="https://note.com/maro_note/n/n3a58e79b0df9" target="_blank">使い方・マルチエンド・解説はこちら</a>
-            </div>
         </div>
     </div>
 </div>
